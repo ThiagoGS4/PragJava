@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UsuarioPrincipal implements UserDetails{
 
-     private  Admin admin;
+     private  Users users;
 
-    public UsuarioPrincipal(Admin admin) {
-        this.admin = admin;
+    public UsuarioPrincipal(Users users) {
+        this.users = users;
     }
     
     @Override
@@ -21,12 +21,12 @@ public class UsuarioPrincipal implements UserDetails{
 
     @Override
     public String getPassword() {
-        return admin.getSenha_hash();
+        return users.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return admin.getNome();
+        return users.getUsername();
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.antiprag.prag.repository;
 
-import com.antiprag.prag.domain.Admin;
+import com.antiprag.prag.domain.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Integer> {
+public interface UsersRepository extends JpaRepository<Users, Integer> {
     
-    Admin findByNome(String nome);
+    Users findByName(String name);
 //  @Override
 //  java.util.Optional<Usuario> findById(Integer id);
 }
