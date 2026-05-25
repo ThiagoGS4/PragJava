@@ -2,7 +2,6 @@ package com.antiprag.prag.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import com.antiprag.prag.domain.Plagues;
 import com.antiprag.prag.repository.PlaguesRepository;
@@ -13,8 +12,6 @@ public class PlaguesService {
     @Autowired
     private PlaguesRepository plaguesRepository;
 
-    @Autowired
-    AuthenticationManager authManager;
 
     public PlaguesService(PlaguesRepository plaguesRepository) {
         this.plaguesRepository = plaguesRepository;

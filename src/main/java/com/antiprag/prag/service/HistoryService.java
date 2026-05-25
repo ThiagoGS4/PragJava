@@ -2,7 +2,6 @@ package com.antiprag.prag.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import com.antiprag.prag.domain.History;
 import com.antiprag.prag.repository.HistoryRepository;
@@ -13,8 +12,6 @@ public class HistoryService {
     @Autowired
     private HistoryRepository historyRepository;
 
-    @Autowired
-    AuthenticationManager authManager;
 
     public HistoryService(HistoryRepository historyRepository) {
         this.historyRepository = historyRepository;

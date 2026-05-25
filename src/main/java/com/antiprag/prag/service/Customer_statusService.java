@@ -2,7 +2,6 @@ package com.antiprag.prag.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import com.antiprag.prag.domain.Customer_status;
 import com.antiprag.prag.repository.Customer_statusRepository;
@@ -13,8 +12,6 @@ public class Customer_statusService {
     @Autowired
     private Customer_statusRepository customer_statusRepository;
 
-    @Autowired
-    AuthenticationManager authManager;
 
     public Customer_statusService(Customer_statusRepository customer_statusRepository) {
         this.customer_statusRepository = customer_statusRepository;

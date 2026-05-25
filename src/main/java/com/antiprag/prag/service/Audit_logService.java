@@ -2,7 +2,6 @@ package com.antiprag.prag.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import com.antiprag.prag.domain.Audit_log;
 import com.antiprag.prag.repository.Audit_logRepository;
@@ -13,8 +12,6 @@ public class Audit_logService {
     @Autowired
     private Audit_logRepository audit_logRepository;
 
-    @Autowired
-    AuthenticationManager authManager;
 
     public Audit_logService(Audit_logRepository audit_logRepository) {
         this.audit_logRepository = audit_logRepository;

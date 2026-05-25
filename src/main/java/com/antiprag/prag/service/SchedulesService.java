@@ -2,7 +2,6 @@ package com.antiprag.prag.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import com.antiprag.prag.domain.Schedules;
 import com.antiprag.prag.repository.SchedulesRepository;
@@ -13,8 +12,6 @@ public class SchedulesService {
     @Autowired
     private SchedulesRepository schedulesRepository;
 
-    @Autowired
-    AuthenticationManager authManager;
 
     public SchedulesService(SchedulesRepository schedulesRepository) {
         this.schedulesRepository = schedulesRepository;
