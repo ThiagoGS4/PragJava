@@ -1,7 +1,6 @@
 package com.antiprag.prag.service;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -10,21 +9,17 @@ import org.springframework.stereotype.Service;
 import com.antiprag.prag.domain.Users;
 import com.antiprag.prag.repository.UsersRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UsersService {
 
-    @Autowired
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
     
-    @Autowired
-    private JWTService jwtService;
+    private final JWTService jwtService;
 
-    @Autowired
-    AuthenticationManager authManager;
-
-    public UsersService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
+    private final AuthenticationManager authManager;
 
     public Users getUsers(Integer id) {
         return usersRepository.findById(id).orElse(null);
@@ -58,7 +53,7 @@ public class UsersService {
     public String verify(Users users) {
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUsername(), users.getPassword()));
    if (authentication.isAuthenticated()) {
-         return jwtService.generateToken(users.getUsername())  ;
+         return jwtService.generateToken(users.getUsername());
         } else {
             return "Falha";
         }

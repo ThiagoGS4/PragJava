@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StatusRepository extends JpaRepository<Status, Integer> {
     
-    Status findByName(String name);
 //  @Override
 //  java.util.Optional<Usuario> findById(Integer id);
 }

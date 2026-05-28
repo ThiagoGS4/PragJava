@@ -1,4 +1,4 @@
-package com.antiprag.prag.Controller;
+/* package com.antiprag.prag.Controller;
 
 import com.antiprag.prag.domain.Privileges;
 import com.antiprag.prag.service.PrivilegesService;
@@ -56,3 +56,4 @@ public class PrivilegesController {
         privilegesService.inserirPrivileges(privileges);
     }
 }
+ */

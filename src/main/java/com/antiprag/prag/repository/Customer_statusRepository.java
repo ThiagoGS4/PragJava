@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Customer_statusRepository extends JpaRepository<Customer_status, Integer> {
     
-    Customer_status findByName(String name);
 //  @Override
 //  java.util.Optional<Usuario> findById(Integer id);
 }

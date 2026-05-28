@@ -3,8 +3,6 @@ package com.antiprag.prag.Controller;
 import com.antiprag.prag.domain.Users;
 import com.antiprag.prag.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -45,23 +43,19 @@ public class UsersController {
         usersService.deletarUsers(id);
     }
 
-    @PutMapping(path = "/alterarUsers", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarUsers(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Users users = mapper.readValue(dados, Users.class);
+    @PutMapping(path = "/alterarUsers")
+    public void alterarUsers(@RequestBody Users users) throws IOException {
         usersService.alterarUsers(users);
     }
 
-    @PostMapping(path = "/inserirUsers", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirUsers(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Users users = mapper.readValue(dados, Users.class);
+    @PostMapping(path = "/inserirUsers")
+    public void inserirUsers(@RequestBody Users users) throws IOException {
         usersService.inserirUsers(users);
     }
     
     @PostMapping("/registrar")
-    public Users register(@RequestBody Users usuario) {
-        return usersService.register(usuario);
+    public Users register(@RequestBody Users users) {
+        return usersService.register(users);
 
     }
 

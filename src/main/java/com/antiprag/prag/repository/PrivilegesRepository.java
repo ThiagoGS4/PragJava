@@ -1,4 +1,4 @@
-package com.antiprag.prag.repository;
+/* package com.antiprag.prag.repository;
 
 import com.antiprag.prag.domain.Privileges;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,3 +9,4 @@ public interface PrivilegesRepository extends JpaRepository<Privileges, Integer>
     
     Privileges findByName(String name);
 }
+ */

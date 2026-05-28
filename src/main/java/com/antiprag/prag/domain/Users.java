@@ -1,7 +1,6 @@
 package com.antiprag.prag.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,9 +10,11 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import java.util.Collection;
+
+import org.hibernate.annotations.DynamicInsert;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 @Table(name =  "users")
 
 public class Users implements Serializable{
@@ -37,8 +39,6 @@ public class Users implements Serializable{
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "role_id")
-    private Integer role_id;
     @Column(name = "is_active")
     private Integer is_active;
     @Column(name = "created_at")
@@ -46,12 +46,12 @@ public class Users implements Serializable{
     @Column(name = "updated_at")
     private Date updated_at;
 
-     @ManyToMany 
-    @JoinTable( 
-        name = "users_roles", 
-        joinColumns = @JoinColumn(
-          name = "user_id", referencedColumnName = "id"), 
-        inverseJoinColumns = @JoinColumn(
-          name = "role_id", referencedColumnName = "id")) 
+    @ManyToMany
+    @JsonManagedReference
+    @JoinTable(
+        name = "user_roles",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Collection<Roles> roles;
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SchedulesRepository extends JpaRepository<Schedules, Integer> {
     
-    Schedules findByName(String name);
+
 //  @Override
 //  java.util.Optional<Usuario> findById(Integer id);
 }

@@ -1,4 +1,4 @@
-package com.antiprag.prag.domain;
+/* package com.antiprag.prag.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,3 +34,4 @@ public class Privileges implements Serializable{
     @ManyToMany(mappedBy = "privileges")
     private Collection<Roles> roles;
 }
+ */
