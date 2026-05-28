@@ -1,5 +1,7 @@
 package com.antiprag.prag.Controller;
 
+import com.antiprag.prag.DTO.UsersInDTO;
+import com.antiprag.prag.DTO.UsersOutDTO;
 import com.antiprag.prag.domain.Users;
 import com.antiprag.prag.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,12 +30,12 @@ public class UsersController {
     }
 
     @GetMapping(path = "/users/{id}")
-    public Users getUsers(@PathVariable("id") Integer id) {
+    public UsersOutDTO getUsers(@PathVariable("id") Integer id) {
         return usersService.getUsers(id);
     }
 
     @GetMapping(path = "/users")
-    public List<Users> ListUsers() {
+    public List<UsersOutDTO> ListUsers() {
         return usersService.ListUsers();
     }
 
@@ -47,16 +49,10 @@ public class UsersController {
     public void alterarUsers(@RequestBody Users users) throws IOException {
         usersService.alterarUsers(users);
     }
-
-    @PostMapping(path = "/inserirUsers")
-    public void inserirUsers(@RequestBody Users users) throws IOException {
-        usersService.inserirUsers(users);
-    }
     
     @PostMapping("/registrar")
-    public Users register(@RequestBody Users users) {
+    public UsersInDTO register(@RequestBody UsersInDTO users) {
         return usersService.register(users);
-
     }
 
     @PostMapping("/logar")

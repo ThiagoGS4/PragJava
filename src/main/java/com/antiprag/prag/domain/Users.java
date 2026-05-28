@@ -9,7 +9,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.Instant;
 import java.util.Collection;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -40,11 +40,11 @@ public class Users implements Serializable{
     @Column(name = "password")
     private String password;
     @Column(name = "is_active")
-    private Integer is_active;
+    private Boolean isActive;
     @Column(name = "created_at")
-    private Date created_at;
+    private Instant createdAt;
     @Column(name = "updated_at")
-    private Date updated_at;
+    private Instant updatedAt;
 
     @ManyToMany
     @JsonManagedReference

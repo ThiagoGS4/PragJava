@@ -49,9 +49,9 @@ public class JWTFilter extends OncePerRequestFilter {
     }
 
     
-    @Override
+/*     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
     String path = request.getServletPath();
     return path.equalsIgnoreCase("/inserirUsers"); // ignora rota desprotegida
-    }
+    } */
 }

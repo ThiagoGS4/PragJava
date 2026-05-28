@@ -6,7 +6,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.antiprag.prag.DTO.UsersInDTO;
+import com.antiprag.prag.DTO.UsersOutDTO;
 import com.antiprag.prag.domain.Users;
+import com.antiprag.prag.mapper.UserMapper;
 import com.antiprag.prag.repository.UsersRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -21,12 +25,20 @@ public class UsersService {
 
     private final AuthenticationManager authManager;
 
-    public Users getUsers(Integer id) {
-        return usersRepository.findById(id).orElse(null);
+    private final UserMapper userMapper;
+
+    public UsersOutDTO getUsers(Integer id) {
+        Users user = usersRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return userMapper.usersToOutDto(user);
     }
 
-    public List<Users> ListUsers() {
-        return usersRepository.findAll();
+    public List<UsersOutDTO> ListUsers() {
+        return usersRepository.findAll()
+            .stream()
+            .map(userMapper::usersToOutDto)
+            .toList();
     }
 
     public void deletarUsers(int idUsers) {
@@ -39,18 +51,19 @@ public class UsersService {
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
     
-    public void inserirUsers(Users users) {
-        users.setPassword(encoder.encode(users.getPassword()));
-        usersRepository.save(users);
-    }
-    
-    public Users register(Users users) {
-        users.setPassword(encoder.encode(users.getPassword()));
-        usersRepository.save(users);
+    public UsersInDTO register(UsersInDTO users) {
+
+        if(users.roles().isEmpty()){
+            users.roles().add(2);
+        }
+
+        Users usersEntity = userMapper.usersToEntity(users);
+        usersEntity.setPassword(encoder.encode(usersEntity.getPassword()));
+        usersRepository.save(usersEntity);
         return users;
     }
 
-    public String verify(Users users) {
+    public String verify(Users users) { // TODO criar DTO para login
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUsername(), users.getPassword()));
    if (authentication.isAuthenticated()) {
          return jwtService.generateToken(users.getUsername());
