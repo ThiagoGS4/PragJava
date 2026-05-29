@@ -42,17 +42,14 @@ public class PropertiesController {
         propertiesService.deletarProperties(id);
     }
 
-    @PutMapping(path = "/alterarProperties", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarProperties(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Properties properties = mapper.readValue(dados, Properties.class);
+    @PutMapping(path = "/alterarProperties")
+    public void alterarProperties(@RequestBody Properties properties) throws IOException {
+
         propertiesService.alterarProperties(properties);
     }
 
-    @PostMapping(path = "/inserirProperties", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirProperties(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Properties properties = mapper.readValue(dados, Properties.class);
+    @PostMapping(path = "/inserirProperties")
+    public void inserirProperties(@RequestBody Properties properties) throws IOException {
         propertiesService.inserirProperties(properties);
     }
 }

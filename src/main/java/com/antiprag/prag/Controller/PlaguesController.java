@@ -42,17 +42,13 @@ public class PlaguesController {
         plaguesService.deletarPlagues(id);
     }
 
-    @PutMapping(path = "/alterarPlagues", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarPlagues(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Plagues plagues = mapper.readValue(dados, Plagues.class);
+    @PutMapping(path = "/alterarPlagues")
+    public void alterarPlagues(@RequestBody Plagues plagues) throws IOException {
         plaguesService.alterarPlagues(plagues);
     }
 
-    @PostMapping(path = "/inserirPlagues", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirPlagues(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Plagues plagues = mapper.readValue(dados, Plagues.class);
+    @PostMapping(path = "/inserirPlagues")
+    public void inserirPlagues(@RequestBody Plagues plagues) throws IOException {
         plaguesService.inserirPlagues(plagues);
     }
 }

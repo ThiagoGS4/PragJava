@@ -42,17 +42,13 @@ public class StatusController {
         statusService.deletarStatus(id);
     }
 
-    @PutMapping(path = "/alterarStatus", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarStatus(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Status status = mapper.readValue(dados, Status.class);
+    @PutMapping(path = "/alterarStatus")
+    public void alterarStatus(@RequestBody Status status) throws IOException {
         statusService.alterarStatus(status);
     }
 
-    @PostMapping(path = "/inserirStatus", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirStatus(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Status status = mapper.readValue(dados, Status.class);
+    @PostMapping(path = "/inserirStatus")
+    public void inserirStatus(@RequestBody Status status) throws IOException {
         statusService.inserirStatus(status);
     }
 }

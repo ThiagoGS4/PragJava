@@ -41,17 +41,13 @@ public class RolesController {
         rolesService.deletarRoles(id);
     }
 
-    @PutMapping(path = "/alterarRoles", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarRoles(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Roles roles = mapper.readValue(dados, Roles.class);
+    @PutMapping(path = "/alterarRoles")
+    public void alterarRoles(@RequestBody Roles roles) throws IOException {
         rolesService.alterarRoles(roles);
     }
 
-    @PostMapping(path = "/inserirRoles", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirRoles(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Roles roles = mapper.readValue(dados, Roles.class);
+    @PostMapping(path = "/inserirRoles")
+    public void inserirRoles(@RequestBody Roles roles) throws IOException {
         rolesService.inserirRoles(roles);
     }
 }

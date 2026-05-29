@@ -5,9 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Collection;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,4 +52,7 @@ public class Customer implements Serializable{
     @Column(name = "updated_at")
     private Date updated_at;
 
+    @ManyToMany(mappedBy = "customer")
+    @JsonBackReference // evitando loop infinito (child)
+    private Collection<Properties> propertiesList;
 }

@@ -42,17 +42,13 @@ public class SchedulesController {
         schedulesService.deletarSchedules(id);
     }
 
-    @PutMapping(path = "/alterarSchedules", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarSchedules(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Schedules schedules = mapper.readValue(dados, Schedules.class);
+    @PutMapping(path = "/alterarSchedules")
+    public void alterarSchedules(@RequestBody Schedules schedules) throws IOException {
         schedulesService.alterarSchedules(schedules);
     }
 
-    @PostMapping(path = "/inserirSchedules", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirSchedules(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Schedules schedules = mapper.readValue(dados, Schedules.class);
+    @PostMapping(path = "/inserirSchedules")
+    public void inserirSchedules(@RequestBody Schedules schedules) throws IOException {
         schedulesService.inserirSchedules(schedules);
     }
 }

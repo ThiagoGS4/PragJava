@@ -41,17 +41,13 @@ public class Audit_logController {
         audit_logService.deletarAudit_log(id);
     }
 
-    @PutMapping(path = "/alterarAudit_log", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarAudit_log(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Audit_log audit_log = mapper.readValue(dados, Audit_log.class);
+    @PutMapping(path = "/alterarAudit_log")
+    public void alterarAudit_log(@RequestBody Audit_log audit_log) throws IOException {
         audit_logService.alterarAudit_log(audit_log);
     }
 
-    @PostMapping(path = "/inserirAudit_log", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirAudit_log(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Audit_log audit_log = mapper.readValue(dados, Audit_log.class);
+    @PostMapping(path = "/inserirAudit_log")
+    public void inserirAudit_log(@RequestBody Audit_log audit_log) throws IOException {
         audit_logService.inserirAudit_log(audit_log);
     }
 }

@@ -42,17 +42,13 @@ public class CustomerController {
         customerService.deletarCustomer(id);
     }
 
-    @PutMapping(path = "/alterarCustomer", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarCustomer(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Customer customer = mapper.readValue(dados, Customer.class);
+    @PutMapping(path = "/alterarCustomer")
+    public void alterarCustomer(@RequestBody Customer customer) throws IOException {
         customerService.alterarCustomer(customer);
     }
 
-    @PostMapping(path = "/inserirCustomer", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirCustomer(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Customer customer = mapper.readValue(dados, Customer.class);
+    @PostMapping(path = "/inserirCustomer")
+    public void inserirCustomer(@RequestBody Customer customer) throws IOException {
         customerService.inserirCustomer(customer);
     }
 }

@@ -42,17 +42,13 @@ public class HistoryController {
         historyService.deletarHistory(id);
     }
 
-    @PutMapping(path = "/alterarHistory", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarHistory(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       History history = mapper.readValue(dados, History.class);
+    @PutMapping(path = "/alterarHistory")
+    public void alterarHistory(@RequestBody History history) throws IOException {
         historyService.alterarHistory(history);
     }
 
-    @PostMapping(path = "/inserirHistory", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirHistory(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        History history = mapper.readValue(dados, History.class);
+    @PostMapping(path = "/inserirHistory")
+    public void inserirHistory(@RequestBody History history) throws IOException {
         historyService.inserirHistory(history);
     }
 }

@@ -42,17 +42,13 @@ public class Customer_statusController {
         customer_statusService.deletarCustomer_status(id);
     }
 
-    @PutMapping(path = "/alterarCustomer_status", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void alterarCustomer_status(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-       Customer_status customer_status = mapper.readValue(dados, Customer_status.class);
+    @PutMapping(path = "/alterarCustomer_status")
+    public void alterarCustomer_status(@RequestBody Customer_status customer_status) throws IOException {
         customer_statusService.alterarCustomer_status(customer_status);
     }
 
-    @PostMapping(path = "/inserirCustomer_status", consumes = {"application/json", "application/x-www-form-urlencoded"})
-    public void inserirCustomer_status(@RequestBody String dados) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Customer_status customer_status = mapper.readValue(dados, Customer_status.class);
+    @PostMapping(path = "/inserirCustomer_status")
+    public void inserirCustomer_status(@RequestBody Customer_status customer_status) throws IOException {
         customer_statusService.inserirCustomer_status(customer_status);
     }
 }
