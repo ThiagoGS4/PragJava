@@ -2,13 +2,18 @@ package com.antiprag.prag.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.Instant;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,4 +60,16 @@ public class Schedules implements Serializable{
     @Column(name = "updated_at")
     private Date updated_at;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plague_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Plagues plagues;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Status status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "services_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Services services;
 }

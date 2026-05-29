@@ -1,4 +1,4 @@
-package com.antiprag.prag.domain;
+/*package com.antiprag.prag.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,4 +28,4 @@ public class Customer_status implements Serializable{
     private Integer id;
     @Column(name = "status_name")
     private String status_name;
-}
+}*/

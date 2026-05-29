@@ -20,5 +20,6 @@ public record PropertiesOutDTO (
     String property_type,
     Integer is_active,
     Instant created_at,
-    Set<String> customer
+    Integer customer_id
+    //Set<String> customer
 ){}

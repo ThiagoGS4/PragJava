@@ -2,19 +2,17 @@ package com.antiprag.prag.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.Instant;
-import java.util.Collection;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -71,12 +69,8 @@ public class Properties implements Serializable{
     @Column(name = "updated_at")
     private Date updated_at;
 
-    @ManyToMany
-    @JsonManagedReference
-    @JoinTable(
-        name = "properties_customer",
-        joinColumns = @JoinColumn(name = "properties_id"),
-        inverseJoinColumns = @JoinColumn(name = "customer_id")
-    )
-    private Collection<Customer> customer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Customer customer;
 }

@@ -1,4 +1,4 @@
-package com.antiprag.prag.service;
+/*package com.antiprag.prag.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +36,4 @@ public class Customer_statusService {
     public void inserirCustomer_status(Customer_status customer_status) {
         customer_statusRepository.save(customer_status);
     }
-}
+}*/

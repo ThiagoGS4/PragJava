@@ -19,11 +19,6 @@ public class PropertiesMapper {
 
     // dto para output de dados do(s) clientes(s)
     public PropertiesOutDTO propertiesToOutDto(Properties properties) {
-            Set<String> customer = properties.getCustomer()
-            .stream()
-            .map(Customer::getName)
-            .collect(Collectors.toSet());
-
         return new PropertiesOutDTO(
                 properties.getNickname(),
                 properties.getCep(),
@@ -41,16 +36,13 @@ public class PropertiesMapper {
                 properties.getProperty_type(),
                 properties.getIs_active(),
                 properties.getCreated_at(),
-                customer
+                properties.getCustomer_id()
+
         );
     }
 
     // dto para input de cliente
     public Properties propertiesToEntity(PropertiesInDTO dto) {
-        Set<Customer> customer = dto.customer()
-            .stream()
-            .map(id -> entityManager.getReference(Customer.class, id))
-            .collect(Collectors.toSet());
         Properties properties = new Properties();
         properties.setNickname(dto.nickname());
         properties.setCep(dto.cep());
@@ -67,7 +59,7 @@ public class PropertiesMapper {
         properties.setLongitude(dto.longitude());
         properties.setProperty_type(dto.property_type());
         properties.setIs_active(dto.is_active());
-        properties.setCustomer(customer);
+        properties.setCustomer_id(dto.customer_id());
 
         return properties;
     }

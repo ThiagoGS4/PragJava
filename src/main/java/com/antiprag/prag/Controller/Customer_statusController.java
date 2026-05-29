@@ -1,4 +1,4 @@
-package com.antiprag.prag.Controller;
+/*package com.antiprag.prag.Controller;
 
 import com.antiprag.prag.domain.Customer_status;
 import com.antiprag.prag.service.Customer_statusService;
@@ -51,4 +51,4 @@ public class Customer_statusController {
     public void inserirCustomer_status(@RequestBody Customer_status customer_status) throws IOException {
         customer_statusService.inserirCustomer_status(customer_status);
     }
-}
+}*/

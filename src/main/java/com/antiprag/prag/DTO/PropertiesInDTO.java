@@ -18,5 +18,6 @@ public record PropertiesInDTO (
     Integer longitude,
     String property_type,
     Integer is_active,
-    Set<Integer> customer
+    Integer customer_id
+    //Set<Integer> customer
 ){}

@@ -5,6 +5,5 @@ public record CustomerInDTO (
     String cpf,
     String cnpj,
     String phone,
-    String email,
-    Integer status_id
+    String email
 ){}

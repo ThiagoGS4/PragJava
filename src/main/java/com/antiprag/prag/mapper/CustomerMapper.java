@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.antiprag.prag.DTO.CustomerInDTO;
 import com.antiprag.prag.DTO.CustomerOutDTO;
 import com.antiprag.prag.domain.Customer;
-import com.antiprag.prag.domain.Customer_status;
+//import com.antiprag.prag.domain.Customer_status;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -25,7 +25,6 @@ public class CustomerMapper {
                 customer.getCnpj(),
                 customer.getPhone(),
                 customer.getEmail(),
-                customer.getStatus_id(),
                 customer.getCreated_at()
         );
     }
@@ -38,7 +37,6 @@ public class CustomerMapper {
         customer.setCnpj(dto.cnpj());
         customer.setPhone(dto.phone());
         customer.setEmail(dto.email());
-        customer.setStatus_id(dto.status_id()); //TODO ver como vai fazer o status do cliente
 
         return customer;
     }

@@ -8,6 +8,5 @@ public record CustomerOutDTO (
     String cnpj,
     String phone,
     String email,
-    Integer status_id,
     Instant created_at
 ){}
