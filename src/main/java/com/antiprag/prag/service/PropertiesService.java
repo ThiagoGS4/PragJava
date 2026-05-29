@@ -1,28 +1,35 @@
 package com.antiprag.prag.service;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.antiprag.prag.DTO.PropertiesInDTO;
+import com.antiprag.prag.DTO.PropertiesOutDTO;
 import com.antiprag.prag.domain.Properties;
+import com.antiprag.prag.mapper.PropertiesMapper;
 import com.antiprag.prag.repository.PropertiesRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class PropertiesService {
 
-    @Autowired
-    private PropertiesRepository propertiesRepository;
+    private final PropertiesRepository propertiesRepository;
 
+    private final PropertiesMapper propertiesMapper;
 
-    public PropertiesService(PropertiesRepository propertiesRepository) {
-        this.propertiesRepository = propertiesRepository;
+    public PropertiesOutDTO getProperties(Integer id) {
+        Properties properties = propertiesRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Properties not found"));
+
+        return propertiesMapper.propertiesToOutDto(properties);
     }
 
-    public Properties getProperties(Integer id) {
-        return propertiesRepository.findById(id).orElse(null);
-    }
-
-    public List<Properties> ListProperties() {
-        return propertiesRepository.findAll();
+    public List<PropertiesOutDTO> ListProperties() {
+        return propertiesRepository.findAll()
+            .stream()
+            .map(propertiesMapper::propertiesToOutDto)
+            .toList();
     }
 
     public void deletarProperties(int idProperties) {
@@ -32,8 +39,9 @@ public class PropertiesService {
     public void alterarProperties(Properties Properties) {
         propertiesRepository.save(Properties);
     }
-
-    public void inserirProperties(Properties properties) {
-        propertiesRepository.save(properties);
+    
+    public PropertiesInDTO register(PropertiesInDTO properties) {
+        return properties;
     }
+
 }

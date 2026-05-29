@@ -1,28 +1,35 @@
 package com.antiprag.prag.service;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.antiprag.prag.DTO.CustomerInDTO;
+import com.antiprag.prag.DTO.CustomerOutDTO;
 import com.antiprag.prag.domain.Customer;
+import com.antiprag.prag.mapper.CustomerMapper;
 import com.antiprag.prag.repository.CustomerRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
+    private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerOutDTO getCustomer(Integer id) {
+        Customer customer = customerRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        return customerMapper.customerToOutDto(customer);
     }
 
-    public Customer getCustomer(Integer id) {
-        return customerRepository.findById(id).orElse(null);
-    }
-
-    public List<Customer> ListCustomer() {
-        return customerRepository.findAll();
+    public List<CustomerOutDTO> ListCustomer() {
+        return customerRepository.findAll()
+            .stream()
+            .map(customerMapper::customerToOutDto)
+            .toList();
     }
 
     public void deletarCustomer(int idCustomer) {
@@ -32,8 +39,9 @@ public class CustomerService {
     public void alterarCustomer(Customer Customer) {
         customerRepository.save(Customer);
     }
-
-    public void inserirCustomer(Customer customer) {
-        customerRepository.save(customer);
+    
+    public CustomerInDTO register(CustomerInDTO customer) {
+        return customer;
     }
+
 }
