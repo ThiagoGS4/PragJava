@@ -1,6 +1,6 @@
 package com.antiprag.prag.DTO;
 
-import java.sql.Date;
+import java.time.Instant;
 
 public record CustomerOutDTO (
     String name,
@@ -9,5 +9,5 @@ public record CustomerOutDTO (
     String phone,
     String email,
     Integer status_id,
-    Date created_at
+    Instant created_at
 ){}

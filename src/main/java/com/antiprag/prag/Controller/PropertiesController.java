@@ -1,5 +1,7 @@
 package com.antiprag.prag.Controller;
 
+import com.antiprag.prag.DTO.PropertiesInDTO;
+import com.antiprag.prag.DTO.PropertiesOutDTO;
 import com.antiprag.prag.domain.Properties;
 import com.antiprag.prag.service.PropertiesService;
 import tools.jackson.databind.ObjectMapper;
@@ -27,12 +29,12 @@ public class PropertiesController {
     }
 
     @GetMapping(path = "/properties/{id}")
-    public Properties getProperties(@PathVariable("id") Integer id) {
+    public PropertiesOutDTO getProperties(@PathVariable("id") Integer id) {
         return propertiesService.getProperties(id);
     }
 
     @GetMapping(path = "/properties")
-    public List<Properties> ListProperties() {
+    public List<PropertiesOutDTO> ListProperties() {
         return propertiesService.ListProperties();
     }
 
@@ -49,7 +51,7 @@ public class PropertiesController {
     }
 
     @PostMapping(path = "/inserirProperties")
-    public void inserirProperties(@RequestBody Properties properties) throws IOException {
+    public void inserirProperties(@RequestBody PropertiesInDTO properties) throws IOException {
         propertiesService.inserirProperties(properties);
     }
 }

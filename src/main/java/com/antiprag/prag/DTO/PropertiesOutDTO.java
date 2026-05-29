@@ -1,6 +1,6 @@
 package com.antiprag.prag.DTO;
 
-import java.sql.Date;
+import java.time.Instant;
 import java.util.Set;
 
 public record PropertiesOutDTO (
@@ -19,6 +19,6 @@ public record PropertiesOutDTO (
     Integer longitude,
     String property_type,
     Integer is_active,
-    Date created_at,
+    Instant created_at,
     Set<String> customer
 ){}

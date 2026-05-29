@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.Instant;
 import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -48,7 +49,7 @@ public class Customer implements Serializable{
     @Column(name = "edited_by")
     private Integer edited_by;
     @Column(name = "created_at")
-    private Date created_at;
+    private Instant created_at;
     @Column(name = "updated_at")
     private Date updated_at;
 

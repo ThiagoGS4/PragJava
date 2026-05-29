@@ -40,7 +40,7 @@ public class CustomerService {
         customerRepository.save(Customer);
     }
     
-    public CustomerInDTO register(CustomerInDTO customer) {
+    public CustomerInDTO inserirCustomer(CustomerInDTO customer) {
         return customer;
     }
 

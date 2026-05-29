@@ -1,5 +1,9 @@
 package com.antiprag.prag.Controller;
 
+import com.antiprag.prag.DTO.CustomerInDTO;
+import com.antiprag.prag.DTO.CustomerOutDTO;
+import com.antiprag.prag.DTO.PropertiesInDTO;
+import com.antiprag.prag.DTO.UsersInDTO;
 import com.antiprag.prag.domain.Customer;
 import com.antiprag.prag.service.CustomerService;
 import tools.jackson.databind.ObjectMapper;
@@ -27,12 +31,12 @@ public class CustomerController {
     }
 
     @GetMapping(path = "/customer/{id}")
-    public Customer getCustomer(@PathVariable("id") Integer id) {
+    public CustomerOutDTO getCustomer(@PathVariable("id") Integer id) {
         return customerService.getCustomer(id);
     }
 
     @GetMapping(path = "/customer")
-    public List<Customer> ListCustomer() {
+    public List<CustomerOutDTO> ListCustomer() {
         return customerService.ListCustomer();
     }
 
@@ -47,8 +51,8 @@ public class CustomerController {
         customerService.alterarCustomer(customer);
     }
 
-    @PostMapping(path = "/inserirCustomer")
-    public void inserirCustomer(@RequestBody Customer customer) throws IOException {
+     @PostMapping(path = "/inserirCustomer")
+    public void inserirCustomer(@RequestBody CustomerInDTO customer) throws IOException {
         customerService.inserirCustomer(customer);
     }
 }

@@ -1,28 +1,35 @@
 package com.antiprag.prag.service;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.antiprag.prag.DTO.SchedulesInDTO;
+import com.antiprag.prag.DTO.SchedulesOutDTO;
 import com.antiprag.prag.domain.Schedules;
+import com.antiprag.prag.mapper.SchedulesMapper;
 import com.antiprag.prag.repository.SchedulesRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class SchedulesService {
 
-    @Autowired
-    private SchedulesRepository schedulesRepository;
+    private final SchedulesRepository schedulesRepository;
 
+    private final SchedulesMapper schedulesMapper;
 
-    public SchedulesService(SchedulesRepository schedulesRepository) {
-        this.schedulesRepository = schedulesRepository;
+    public SchedulesOutDTO getSchedules(Integer id) {
+        Schedules schedules = schedulesRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Schedules not found"));
+
+        return schedulesMapper.schedulesToOutDto(schedules);
     }
 
-    public Schedules getSchedules(Integer id) {
-        return schedulesRepository.findById(id).orElse(null);
-    }
-
-    public List<Schedules> ListSchedules() {
-        return schedulesRepository.findAll();
+    public List<SchedulesOutDTO> ListSchedules() {
+        return schedulesRepository.findAll()
+            .stream()
+            .map(schedulesMapper::schedulesToOutDto)
+            .toList();
     }
 
     public void deletarSchedules(int idSchedules) {
@@ -32,8 +39,9 @@ public class SchedulesService {
     public void alterarSchedules(Schedules Schedules) {
         schedulesRepository.save(Schedules);
     }
-
-    public void inserirSchedules(Schedules schedules) {
-        schedulesRepository.save(schedules);
+    
+    public SchedulesInDTO inserirSchedules(SchedulesInDTO schedules) {
+        return schedules;
     }
+
 }

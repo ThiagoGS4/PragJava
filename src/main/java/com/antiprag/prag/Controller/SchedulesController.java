@@ -1,5 +1,7 @@
 package com.antiprag.prag.Controller;
 
+import com.antiprag.prag.DTO.SchedulesInDTO;
+import com.antiprag.prag.DTO.SchedulesOutDTO;
 import com.antiprag.prag.domain.Schedules;
 import com.antiprag.prag.service.SchedulesService;
 import tools.jackson.databind.ObjectMapper;
@@ -27,12 +29,12 @@ public class SchedulesController {
     }
 
     @GetMapping(path = "/schedules/{id}")
-    public Schedules getSchedules(@PathVariable("id") Integer id) {
+    public SchedulesOutDTO getSchedules(@PathVariable("id") Integer id) {
         return schedulesService.getSchedules(id);
     }
 
     @GetMapping(path = "/schedules")
-    public List<Schedules> ListSchedules() {
+    public List<SchedulesOutDTO> ListSchedules() {
         return schedulesService.ListSchedules();
     }
 
@@ -48,7 +50,7 @@ public class SchedulesController {
     }
 
     @PostMapping(path = "/inserirSchedules")
-    public void inserirSchedules(@RequestBody Schedules schedules) throws IOException {
+    public void inserirSchedules(@RequestBody SchedulesInDTO schedules) throws IOException {
         schedulesService.inserirSchedules(schedules);
     }
 }

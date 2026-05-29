@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,7 +51,7 @@ public class Schedules implements Serializable{
     @Column(name = "deleted_at")
     private Date deleted_at;
     @Column(name = "created_at")
-    private Date created_at;
+    private Instant created_at;
     @Column(name = "updated_at")
     private Date updated_at;
 

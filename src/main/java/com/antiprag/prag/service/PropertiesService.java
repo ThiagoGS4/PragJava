@@ -40,7 +40,7 @@ public class PropertiesService {
         propertiesRepository.save(Properties);
     }
     
-    public PropertiesInDTO register(PropertiesInDTO properties) {
+    public PropertiesInDTO inserirProperties(PropertiesInDTO properties) {
         return properties;
     }
 
