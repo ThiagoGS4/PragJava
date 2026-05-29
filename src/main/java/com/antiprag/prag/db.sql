@@ -1,10 +1,12 @@
 CREATE USER 'aluno'@'%' IDENTIFIED BY 'segredo';
 
-GRANT ALL PRIVILEGES ON treino_java_spring.* TO 'aluno'@'%';
+GRANT ALL PRIVILEGES ON prag.* TO 'aluno'@'%';
 
 FLUSH PRIVILEGES;
 
 SHOW GRANTS FOR 'aluno'@'%';
+
+use prag
 
 CREATE TABLE roles (
     id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -46,13 +48,6 @@ create table plagues (
 	UNIQUE KEY uq_plague_name (plague_name)
 )
 
-create table customer_status (
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (id),
-	status_name VARCHAR(100) NOT NULL,
-	UNIQUE KEY uq_customer_status_name (status_name)
-)
-
 create table services (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (id),
@@ -63,8 +58,6 @@ create table services (
 create table customers (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (id),
-	status_id INT UNSIGNED,
-	FOREIGN KEY (status_id) REFERENCES customer_status(id),
 	name VARCHAR(100) NOT NULL,
 	cpf CHAR(11),
 	cnpj CHAR(14),
@@ -187,7 +180,7 @@ create table audit_log (
 	FOREIGN KEY (user_id) REFERENCES users(id),
 	operation VARCHAR(100) NOT NULL,
 	method ENUM('GET', 'POST', 'PUT', 'DELETE') NOT NULL,
-	`table` ENUM('users', 'status', 'plagues', 'customer_status', 'services', 'customers', 'properties') NOT NULL,
+	`table` ENUM('users', 'status', 'plagues', 'services', 'customers', 'properties', 'refresh_tokens') NOT NULL,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 	created_by INT UNSIGNED NOT NULL,
 	CONSTRAINT fk_audit_created_by
@@ -205,4 +198,5 @@ CREATE TABLE refresh_tokens (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_refresh_tokens_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
 
