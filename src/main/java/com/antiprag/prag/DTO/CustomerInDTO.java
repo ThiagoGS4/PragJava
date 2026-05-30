@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 public record CustomerInDTO (
+    Integer id,
 
     @NotBlank(message = "Nome é obrigatório")
     String name,

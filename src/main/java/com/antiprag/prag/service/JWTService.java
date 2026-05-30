@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-@ConfigurationProperties("app.jwt")
+@ConfigurationProperties(prefix = "app.jwt")
 public class JWTService {
 
 

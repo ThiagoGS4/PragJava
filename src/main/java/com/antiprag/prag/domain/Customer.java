@@ -11,7 +11,6 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.Instant;
-import java.util.List;
 import java.util.Set;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -45,8 +44,6 @@ public class Customer implements Serializable{
     private String phone;
     @Column(name = "email")
     private String email;
-    @Column(name = "status_id")
-    private Integer status_id;
     @Column(name = "created_by")
     private Integer created_by;
     @Column(name = "edited_by")
@@ -54,7 +51,7 @@ public class Customer implements Serializable{
     @Column(name = "created_at")
     private Instant created_at;
     @Column(name = "updated_at")
-    private Date updated_at;
+    private Instant updated_at;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private Set<Properties> properties;

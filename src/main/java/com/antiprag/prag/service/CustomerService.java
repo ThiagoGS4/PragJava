@@ -1,7 +1,12 @@
 package com.antiprag.prag.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.antiprag.prag.DTO.CustomerInDTO;
 import com.antiprag.prag.DTO.CustomerOutDTO;
 import com.antiprag.prag.domain.Customer;
@@ -36,8 +41,14 @@ public class CustomerService {
         customerRepository.deleteById(idCustomer);
     }
 
-    public void alterarCustomer(Customer Customer) {
-        customerRepository.save(Customer);
+    public CustomerOutDTO alterarCustomer(CustomerInDTO customer, UsuarioPrincipal usuarioPrincipal) {
+        Integer userId = usuarioPrincipal.getId();
+        Customer customerEntity = customerRepository.findById(customer.id())
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+
+        customerMapper.updateCustomerEntity(customer, customerEntity, userId);
+        
+        return customerMapper.customerToOutDto(customerRepository.save(customerEntity));
     }
 
     public CustomerOutDTO inserirCustomer(CustomerInDTO customer, UsuarioPrincipal usuarioPrincipal) {

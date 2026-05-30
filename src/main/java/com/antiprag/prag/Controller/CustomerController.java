@@ -2,7 +2,6 @@ package com.antiprag.prag.Controller;
 
 import com.antiprag.prag.DTO.CustomerInDTO;
 import com.antiprag.prag.DTO.CustomerOutDTO;
-import com.antiprag.prag.domain.Customer;
 import com.antiprag.prag.domain.UsuarioPrincipal;
 import com.antiprag.prag.service.CustomerService;
 
@@ -46,8 +45,8 @@ public class CustomerController {
     }
 
     @PutMapping(path = "/alterarCustomer")
-    public void alterarCustomer(@RequestBody Customer customer) throws IOException {
-        customerService.alterarCustomer(customer);
+    public CustomerOutDTO alterarCustomer(@Valid @RequestBody CustomerInDTO customer, @AuthenticationPrincipal UsuarioPrincipal usuarioPrincipal) throws IOException {
+        return customerService.alterarCustomer(customer, usuarioPrincipal);
     }
 
     // TODO: adicionar esse @AuthenticationPrincipal em todos os lugares que precisam de dados do usuário logado.

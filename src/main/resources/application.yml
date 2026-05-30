@@ -5,6 +5,8 @@ app:
         refresh-expiration-ms: 1296000000 # 15 dias
     dev:
         development: false
+    zone:
+        zone-time: 10800
 spring:
   profiles:
     active: local

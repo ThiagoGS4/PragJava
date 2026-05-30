@@ -1,18 +1,29 @@
 package com.antiprag.prag.mapper;
+import java.time.Instant;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+
+import com.antiprag.prag.JWTFilter;
 import com.antiprag.prag.DTO.CustomerInDTO;
 import com.antiprag.prag.DTO.CustomerOutDTO;
 import com.antiprag.prag.domain.Customer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
+@ConfigurationProperties(prefix = "app.zone")
 public class CustomerMapper {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    private Long zoneTime;
+
+    public void setZoneTime(Long zoneTime) {
+        this.zoneTime = zoneTime;
+    }
 
     // dto para output de dados do(s) clientes(s)
     public CustomerOutDTO customerToOutDto(Customer customer) {
@@ -25,7 +36,7 @@ public class CustomerMapper {
                 customer.getCreated_at());
     }
 
-    // dto para input de cliente
+    // dto para input post de cliente
     public Customer customerToEntity(CustomerInDTO dto, Integer userId) {
         Customer customer = new Customer();
         customer.setName(dto.name());
@@ -36,6 +47,16 @@ public class CustomerMapper {
         customer.setCreated_by(userId);
 
         return customer;
+    }
+    // dto para input put de cliente
+    public void updateCustomerEntity(CustomerInDTO dto, Customer customer, Integer userId) {
+        customer.setName(dto.name());
+        customer.setCpf(dto.cpf());
+        customer.setCnpj(dto.cnpj());
+        customer.setPhone(dto.phone());
+        customer.setEmail(dto.email());
+        customer.setUpdated_at(Instant.now().minusSeconds(zoneTime));
+        customer.setEdited_by(userId);
     }
 
 }
