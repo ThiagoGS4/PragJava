@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import com.antiprag.prag.DTO.CustomerInDTO;
 import com.antiprag.prag.DTO.CustomerOutDTO;
 import com.antiprag.prag.domain.Customer;
+import com.antiprag.prag.domain.UsuarioPrincipal;
 import com.antiprag.prag.mapper.CustomerMapper;
 import com.antiprag.prag.repository.CustomerRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -20,16 +20,16 @@ public class CustomerService {
 
     public CustomerOutDTO getCustomer(Integer id) {
         Customer customer = customerRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
 
         return customerMapper.customerToOutDto(customer);
     }
 
     public List<CustomerOutDTO> ListCustomer() {
         return customerRepository.findAll()
-            .stream()
-            .map(customerMapper::customerToOutDto)
-            .toList();
+                .stream()
+                .map(customerMapper::customerToOutDto)
+                .toList();
     }
 
     public void deletarCustomer(int idCustomer) {
@@ -39,9 +39,12 @@ public class CustomerService {
     public void alterarCustomer(Customer Customer) {
         customerRepository.save(Customer);
     }
-    
-    public CustomerInDTO inserirCustomer(CustomerInDTO customer) {
-        return customer;
+
+    public CustomerOutDTO inserirCustomer(CustomerInDTO customer, UsuarioPrincipal usuarioPrincipal) {
+        Integer userId = usuarioPrincipal.getId();
+
+        Customer customerEntity = customerMapper.customerToEntity(customer, userId);
+        return customerMapper.customerToOutDto(customerRepository.save(customerEntity));
     }
 
 }

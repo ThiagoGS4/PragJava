@@ -1,6 +1,8 @@
 package com.antiprag.prag;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,20 +21,32 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@ConfigurationProperties(prefix = "app.dev")
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private Boolean development;
 
     private final UserDetailsService userDetailsService;
     private final JWTFilter jwtFilter;
 
+    public void setDevelopment(Boolean development) {
+        this.development = development;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        String[] allowedRoutes = Boolean.TRUE.equals(development)
+                ? new String[] { "/**" }
+                : new String[] { "/logar", "/registrar" };
+
         return http
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/logar", "/registrar").permitAll()
+                        .requestMatchers(allowedRoutes).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .authenticationProvider(authenticationProvider())

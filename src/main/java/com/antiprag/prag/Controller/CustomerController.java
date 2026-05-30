@@ -2,14 +2,16 @@ package com.antiprag.prag.Controller;
 
 import com.antiprag.prag.DTO.CustomerInDTO;
 import com.antiprag.prag.DTO.CustomerOutDTO;
-import com.antiprag.prag.DTO.PropertiesInDTO;
-import com.antiprag.prag.DTO.UsersInDTO;
 import com.antiprag.prag.domain.Customer;
+import com.antiprag.prag.domain.UsuarioPrincipal;
 import com.antiprag.prag.service.CustomerService;
-import tools.jackson.databind.ObjectMapper;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
+@RequiredArgsConstructor
 public class CustomerController {
 
-    private CustomerService customerService;
-
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
+    private final CustomerService customerService;
 
     @GetMapping(path = "/customer/{id}")
     public CustomerOutDTO getCustomer(@PathVariable("id") Integer id) {
@@ -51,8 +50,9 @@ public class CustomerController {
         customerService.alterarCustomer(customer);
     }
 
-     @PostMapping(path = "/inserirCustomer")
-    public void inserirCustomer(@RequestBody CustomerInDTO customer) throws IOException {
-        customerService.inserirCustomer(customer);
+    // TODO: adicionar esse @AuthenticationPrincipal em todos os lugares que precisam de dados do usuário logado.
+    @PostMapping(path = "/inserirCustomer")
+    public CustomerOutDTO inserirCustomer(@Valid @RequestBody CustomerInDTO customer, @AuthenticationPrincipal UsuarioPrincipal usuarioPrincipal) throws IOException {
+        return customerService.inserirCustomer(customer, usuarioPrincipal);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UsuarioPrincipal implements UserDetails{
 
-     private  Users users;
+    private  Users users;
 
     public UsuarioPrincipal(Users users) {
         this.users = users;
@@ -27,6 +27,10 @@ public class UsuarioPrincipal implements UserDetails{
     @Override
     public String getUsername() {
         return users.getUsername();
+    }
+
+    public Integer getId() {
+        return users.getId();
     }
 
     @Override

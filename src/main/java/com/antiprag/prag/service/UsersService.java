@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -64,8 +66,16 @@ public class UsersService {
     }
 
     public String verify(Users users) { // TODO criar DTO para login
+        SecurityContext context = SecurityContextHolder.createEmptyContext(); // criando contextHolder
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUsername(), users.getPassword()));
    if (authentication.isAuthenticated()) {
+
+        context.setAuthentication(authentication); // colocando autenticação, pois usuário está autenticado
+
+        SecurityContextHolder.setContext(context); // alimentando contexto de Sec.
+        
+        System.out.println("SecurityContextHolder.getContext() --> " + SecurityContextHolder.getContext());
+
          return jwtService.generateToken(users.getUsername());
         } else {
             return "Falha";

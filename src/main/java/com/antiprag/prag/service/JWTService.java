@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,15 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+@ConfigurationProperties("app.jwt")
 public class JWTService {
 
 
     private String secretkey = "vL8G2vA8Z+sP8bQ5hE2aB1yI6Z3eD9fJ+tU/kM7xR4w=";
-    // criar yml
+
+/*     public JWTService(String secret) {
+        secretkey = secret;
+    } */
 
     public String generateToken(String nome) {
         Map<String, Object> claims = new HashMap<>();

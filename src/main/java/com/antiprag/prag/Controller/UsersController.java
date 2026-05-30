@@ -5,6 +5,8 @@ import com.antiprag.prag.DTO.UsersOutDTO;
 import com.antiprag.prag.domain.Users;
 import com.antiprag.prag.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -21,13 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
+@RequiredArgsConstructor
 public class UsersController {
 
-    private UsersService usersService;
-
-    public UsersController(UsersService usersService) {
-        this.usersService = usersService;
-    }
+    private final UsersService usersService;
 
     @GetMapping(path = "/users/{id}")
     public UsersOutDTO getUsers(@PathVariable("id") Integer id) {

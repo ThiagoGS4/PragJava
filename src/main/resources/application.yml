@@ -1,0 +1,10 @@
+app:
+    jwt:
+        secret: ${JWT_SECRET:Ay7RFWallcFy7TtFVRTHHEO3fewrfwefqwyRd45p3210K8FDs2eeds5SSr}
+        access-expiration-ms: 900000 #15 minutos
+        refresh-expiration-ms: 1296000000 # 15 dias
+    dev:
+        development: false
+spring:
+  profiles:
+    active: local
