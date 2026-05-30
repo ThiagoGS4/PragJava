@@ -1,5 +1,6 @@
 package com.antiprag.prag.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,10 +9,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.Instant;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -32,8 +37,6 @@ public class Properties implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "customer_id")
-    private Integer customer_id;
     @Column(name = "nickname")
     private String nickname;
     @Column(name = "cep")
@@ -70,7 +73,9 @@ public class Properties implements Serializable{
     private Date updated_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "properties")
+    private Set<Schedules> schedules;
 }

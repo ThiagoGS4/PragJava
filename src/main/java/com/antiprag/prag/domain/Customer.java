@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
+
+import org.hibernate.annotations.DynamicInsert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name =  "customers")
+@DynamicInsert
 
 public class Customer implements Serializable{
        
@@ -53,5 +57,5 @@ public class Customer implements Serializable{
     private Date updated_at;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    private List<Properties> properties;
+    private Set<Properties> properties;
 }

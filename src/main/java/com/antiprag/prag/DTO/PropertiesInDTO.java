@@ -17,7 +17,6 @@ public record PropertiesInDTO (
     Integer latitude,
     Integer longitude,
     String property_type,
-    Integer is_active,
-    Integer customer_id
+    Integer is_active
     //Set<Integer> customer
 ){}

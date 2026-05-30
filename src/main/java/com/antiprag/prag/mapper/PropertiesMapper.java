@@ -35,8 +35,8 @@ public class PropertiesMapper {
                 properties.getLongitude(),
                 properties.getProperty_type(),
                 properties.getIs_active(),
-                properties.getCreated_at(),
-                properties.getCustomer_id()
+                properties.getCreated_at()
+                //properties.getCustomer_id()
 
         );
     }
@@ -59,7 +59,7 @@ public class PropertiesMapper {
         properties.setLongitude(dto.longitude());
         properties.setProperty_type(dto.property_type());
         properties.setIs_active(dto.is_active());
-        properties.setCustomer_id(dto.customer_id());
+       // properties.setCustomer_id(dto.customer_id());
 
         return properties;
     }
