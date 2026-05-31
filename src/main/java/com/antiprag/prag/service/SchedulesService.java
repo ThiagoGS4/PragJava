@@ -1,13 +1,15 @@
 package com.antiprag.prag.service;
 
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import com.antiprag.prag.DTO.SchedulesInDTO;
 import com.antiprag.prag.DTO.SchedulesOutDTO;
 import com.antiprag.prag.domain.Schedules;
+import com.antiprag.prag.domain.UsuarioPrincipal;
 import com.antiprag.prag.mapper.SchedulesMapper;
 import com.antiprag.prag.repository.SchedulesRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -36,12 +38,21 @@ public class SchedulesService {
         schedulesRepository.deleteById(idSchedules);
     }
 
-    public void alterarSchedules(Schedules Schedules) {
-        schedulesRepository.save(Schedules);
+    public SchedulesOutDTO alterarSchedules(SchedulesInDTO schedules, UsuarioPrincipal usuarioPrincipal) {
+        Integer userId = usuarioPrincipal.getId();
+
+        Schedules schedulesEntity = schedulesRepository.findById(schedules.id())
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+        
+        schedulesEntity = schedulesMapper.updateSchedulesToEntity(schedules, schedulesEntity, userId);
+        return schedulesMapper.schedulesToOutDto(schedulesRepository.save(schedulesEntity));
     }
     
-    public SchedulesInDTO inserirSchedules(SchedulesInDTO schedules) {
-        return schedules;
+    public SchedulesOutDTO inserirSchedules(SchedulesInDTO schedules, UsuarioPrincipal usuarioPrincipal) {
+        Integer userId = usuarioPrincipal.getId();
+
+        Schedules schedulesEntity = schedulesMapper.schedulesToEntity(schedules, userId);
+        return schedulesMapper.schedulesToOutDto(schedulesRepository.save(schedulesEntity));
     }
 
 }

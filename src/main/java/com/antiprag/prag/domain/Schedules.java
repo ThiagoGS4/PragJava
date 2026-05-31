@@ -1,6 +1,5 @@
 package com.antiprag.prag.domain;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,14 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.Instant;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import org.hibernate.annotations.DynamicInsert;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 @Table(name =  "schedules")
 
 public class Schedules implements Serializable{
@@ -37,20 +33,20 @@ public class Schedules implements Serializable{
     private Integer id;
     @Column(name = "created_by")
     private Integer created_by;
+    @Column(name = "edited_by")
+    private Integer edited_by;
     @Column(name = "scheduled_start")
-    private Date scheduled_start;
+    private Instant scheduled_start;
     @Column(name = "scheduled_end")
-    private Date scheduled_end;
-    @Column(name = "scheduled_at")
-    private Date scheduled_at;
+    private Instant scheduled_end;
+    @Column(name = "completed_at")
+    private Instant completed_at;
     @Column(name = "notes")
     private String notes;
-    @Column(name = "deleted_at")
-    private Date deleted_at;
     @Column(name = "created_at")
     private Instant created_at;
     @Column(name = "updated_at")
-    private Date updated_at;
+    private Instant updated_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plague_id")
@@ -59,13 +55,13 @@ public class Schedules implements Serializable{
     @JoinColumn(name = "status_id")
     private Status status;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "services_id")
+    @JoinColumn(name = "service_id")
     private Services services;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", nullable = false)
     private Properties properties;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assined_technician_id", nullable = false)
+    @JoinColumn(name = "assigned_technician_id", nullable = false)
     private Users users;
 }
 

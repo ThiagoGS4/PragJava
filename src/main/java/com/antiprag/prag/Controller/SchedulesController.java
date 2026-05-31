@@ -2,12 +2,12 @@ package com.antiprag.prag.Controller;
 
 import com.antiprag.prag.DTO.SchedulesInDTO;
 import com.antiprag.prag.DTO.SchedulesOutDTO;
-import com.antiprag.prag.domain.Schedules;
+import com.antiprag.prag.domain.UsuarioPrincipal;
 import com.antiprag.prag.service.SchedulesService;
-import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,19 +38,19 @@ public class SchedulesController {
         return schedulesService.ListSchedules();
     }
 
-    @DeleteMapping(path = "/deletar/Schedules/{id}")
+    @DeleteMapping(path = "schedules/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarSchedules(@PathVariable("id") Integer id) throws IOException {
         schedulesService.deletarSchedules(id);
     }
 
     @PutMapping(path = "/alterarSchedules")
-    public void alterarSchedules(@RequestBody Schedules schedules) throws IOException {
-        schedulesService.alterarSchedules(schedules);
+    public SchedulesOutDTO alterarSchedules(@RequestBody SchedulesInDTO schedules, @AuthenticationPrincipal UsuarioPrincipal usuarioPrincipal) throws IOException {
+        return schedulesService.alterarSchedules(schedules, usuarioPrincipal);
     }
 
     @PostMapping(path = "/inserirSchedules")
-    public void inserirSchedules(@RequestBody SchedulesInDTO schedules) throws IOException {
-        schedulesService.inserirSchedules(schedules);
+    public SchedulesOutDTO inserirSchedules(@RequestBody SchedulesInDTO schedules, @AuthenticationPrincipal UsuarioPrincipal usuarioPrincipal) throws IOException {
+        return schedulesService.inserirSchedules(schedules, usuarioPrincipal);
     }
 }

@@ -1,16 +1,15 @@
 package com.antiprag.prag.DTO;
-
-import java.sql.Date;
-import java.util.Set;
+import java.time.Instant;
 
 public record SchedulesInDTO (
-    Date scheduled_start,
-    Date scheduled_end,
-    Date scheduled_at,
-    String notes/* ,
-    Set<Integer> properties,
-    Set<Integer> plagues,
-    Set<Integer> service,
-    Set<Integer> status,
-    Set<Integer> user*/
+    Integer id,
+    Instant scheduled_start,
+    Instant scheduled_end,
+    Instant completed_at,
+    String notes,
+    Integer properties,
+    Integer plagues,
+    Integer service,
+    Integer status,
+    Integer user
 ){}
