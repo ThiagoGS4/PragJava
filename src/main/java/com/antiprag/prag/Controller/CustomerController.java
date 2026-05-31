@@ -38,7 +38,7 @@ public class CustomerController {
         return customerService.ListCustomer();
     }
 
-    @DeleteMapping(path = "/deletar/Customer/{id}")
+    @DeleteMapping(path = "/customer/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarCustomer(@PathVariable("id") Integer id) throws IOException {
         customerService.deletarCustomer(id);
