@@ -3,11 +3,13 @@ package com.antiprag.prag.Controller;
 import com.antiprag.prag.DTO.PropertiesInDTO;
 import com.antiprag.prag.DTO.PropertiesOutDTO;
 import com.antiprag.prag.domain.Properties;
+import com.antiprag.prag.domain.UsuarioPrincipal;
 import com.antiprag.prag.service.PropertiesService;
 import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,13 +47,13 @@ public class PropertiesController {
     }
 
     @PutMapping(path = "/alterarProperties")
-    public void alterarProperties(@RequestBody Properties properties) throws IOException {
+    public PropertiesOutDTO alterarProperties(@RequestBody PropertiesInDTO properties, @AuthenticationPrincipal UsuarioPrincipal usuarioPrincipal) throws IOException {
 
-        propertiesService.alterarProperties(properties);
+        return propertiesService.alterarProperties(properties);
     }
 
     @PostMapping(path = "/inserirProperties")
-    public void inserirProperties(@RequestBody PropertiesInDTO properties) throws IOException {
-        propertiesService.inserirProperties(properties);
+    public PropertiesOutDTO inserirProperties(@RequestBody PropertiesInDTO properties, @AuthenticationPrincipal UsuarioPrincipal usuarioPrincipal) throws IOException {
+        return propertiesService.inserirProperties(properties);
     }
 }

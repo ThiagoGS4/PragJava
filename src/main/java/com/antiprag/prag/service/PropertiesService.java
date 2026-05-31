@@ -1,10 +1,15 @@
 package com.antiprag.prag.service;
 
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.antiprag.prag.DTO.PropertiesInDTO;
 import com.antiprag.prag.DTO.PropertiesOutDTO;
 import com.antiprag.prag.domain.Properties;
+import com.antiprag.prag.domain.UsuarioPrincipal;
 import com.antiprag.prag.mapper.PropertiesMapper;
 import com.antiprag.prag.repository.PropertiesRepository;
 
@@ -36,12 +41,20 @@ public class PropertiesService {
         propertiesRepository.deleteById(idProperties);
     }
 
-    public void alterarProperties(Properties Properties) {
-        propertiesRepository.save(Properties);
+    //Adicionar validação de campos
+    public PropertiesOutDTO alterarProperties(PropertiesInDTO properties) {
+        Properties propertiesEntity = propertiesRepository.findById(properties.id())
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Propriedade não encontrado"));
+
+        propertiesMapper.updatePropertiesToEntity(properties, propertiesEntity);
+        
+        return propertiesMapper.propertiesToOutDto(propertiesRepository.save(propertiesEntity));
     }
-    
-    public PropertiesInDTO inserirProperties(PropertiesInDTO properties) {
-        return properties;
+
+    public PropertiesOutDTO inserirProperties(PropertiesInDTO properties) {
+
+        Properties propertiesEntity = propertiesMapper.propertiesToEntity(properties);
+        return propertiesMapper.propertiesToOutDto(propertiesRepository.save(propertiesEntity));
     }
 
 }

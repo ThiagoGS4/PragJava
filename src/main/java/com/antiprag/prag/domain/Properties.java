@@ -17,6 +17,8 @@ import java.sql.Date;
 import java.time.Instant;
 import java.util.Set;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +32,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name =  "properties")
+@DynamicInsert
 
 public class Properties implements Serializable{
        
@@ -70,7 +73,7 @@ public class Properties implements Serializable{
     @Column(name = "created_at")
     private Instant created_at;
     @Column(name = "updated_at")
-    private Date updated_at;
+    private Instant updated_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)

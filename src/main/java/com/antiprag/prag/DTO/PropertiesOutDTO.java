@@ -19,6 +19,6 @@ public record PropertiesOutDTO (
     Integer longitude,
     String property_type,
     Integer is_active,
-    Instant created_at
-    //Set<String> customer
+    Instant created_at,
+    String customer
 ){}

@@ -2,7 +2,11 @@ package com.antiprag.prag.DTO;
 
 import java.util.Set;
 
+import com.antiprag.prag.domain.Customer;
+
 public record PropertiesInDTO (
+    Integer id,
+
     String nickname,
     String cep,
     String street,
@@ -17,6 +21,6 @@ public record PropertiesInDTO (
     Integer latitude,
     Integer longitude,
     String property_type,
-    Integer is_active
-    //Set<Integer> customer
+    Integer is_active,
+    Integer customer
 ){}
