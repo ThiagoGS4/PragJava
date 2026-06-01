@@ -25,25 +25,9 @@ public class AuditLogController {
         this.audit_logService = audit_logService;
     }
 
-    @GetMapping(path = "/audit_log/{id}")
-    public AuditLog getAudit_log(@PathVariable("id") Integer id) {
-        return audit_logService.getAudit_log(id);
-    }
-
     @GetMapping(path = "/audit_log")
     public List<AuditLog> ListAudit_log() {
         return audit_logService.ListAudit_log();
-    }
-
-    @DeleteMapping(path = "/deletar/Audit_log/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletarAudit_log(@PathVariable("id") Integer id) throws IOException {
-        audit_logService.deletarAudit_log(id);
-    }
-
-    @PutMapping(path = "/alterarAudit_log")
-    public void alterarAudit_log(@RequestBody AuditLog audit_log) throws IOException {
-        audit_logService.alterarAudit_log(audit_log);
     }
 
     @PostMapping(path = "/inserirAudit_log")
