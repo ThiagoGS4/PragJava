@@ -7,7 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.Instant;
+
+import org.hibernate.annotations.DynamicInsert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +22,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name =  "audit_log")
+@DynamicInsert
 
-public class Audit_log implements Serializable{
+public class AuditLog implements Serializable{
        
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +36,12 @@ public class Audit_log implements Serializable{
     private String operation;
     @Column(name = "method")
     private String method;
-    @Column(name = "table")
-    private String table;
     @Column(name = "created_by")
     private Integer created_by;
     @Column(name = "created_at")
-    private Date created_at;
+    private Instant created_at;
+    @Column(name = "status")
+    private Integer status;
 
 
 }

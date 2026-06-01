@@ -1,6 +1,6 @@
 package com.antiprag.prag.Controller;
-import com.antiprag.prag.domain.Audit_log;
-import com.antiprag.prag.service.Audit_logService;
+import com.antiprag.prag.domain.AuditLog;
+import com.antiprag.prag.service.AuditLogService;
 import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
-public class Audit_logController {
+public class AuditLogController {
 
-    private Audit_logService audit_logService;
+    private AuditLogService audit_logService;
 
-    public Audit_logController(Audit_logService audit_logService) {
+    public AuditLogController(AuditLogService audit_logService) {
         this.audit_logService = audit_logService;
     }
 
     @GetMapping(path = "/audit_log/{id}")
-    public Audit_log getAudit_log(@PathVariable("id") Integer id) {
+    public AuditLog getAudit_log(@PathVariable("id") Integer id) {
         return audit_logService.getAudit_log(id);
     }
 
     @GetMapping(path = "/audit_log")
-    public List<Audit_log> ListAudit_log() {
+    public List<AuditLog> ListAudit_log() {
         return audit_logService.ListAudit_log();
     }
 
@@ -42,12 +42,12 @@ public class Audit_logController {
     }
 
     @PutMapping(path = "/alterarAudit_log")
-    public void alterarAudit_log(@RequestBody Audit_log audit_log) throws IOException {
+    public void alterarAudit_log(@RequestBody AuditLog audit_log) throws IOException {
         audit_logService.alterarAudit_log(audit_log);
     }
 
     @PostMapping(path = "/inserirAudit_log")
-    public void inserirAudit_log(@RequestBody Audit_log audit_log) throws IOException {
+    public void inserirAudit_log(@RequestBody AuditLog audit_log) throws IOException {
         audit_logService.inserirAudit_log(audit_log);
     }
 }

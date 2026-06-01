@@ -1,5 +1,8 @@
 package com.antiprag.prag;
 
+import com.antiprag.prag.domain.AuditLog;
+import com.antiprag.prag.domain.Users;
+import com.antiprag.prag.service.AuditLogService;
 import com.antiprag.prag.service.JWTService;
 import com.antiprag.prag.service.UsuarioDetailService;
 import jakarta.servlet.FilterChain;
@@ -24,6 +27,8 @@ public class JWTFilter extends OncePerRequestFilter {
 
     private Boolean development;
 
+    private final AuditLogService auditLogService;
+
     public void setDevelopment(Boolean development) {
         this.development = development;
     }
@@ -33,7 +38,8 @@ public class JWTFilter extends OncePerRequestFilter {
     private final ApplicationContext context;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String nome = null;
@@ -44,21 +50,47 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         // vendo se usuário é nulo e se já existe sessão ativa desse usuário
-        // TODO esse check de token/usuário está muito estranho, ele revalida nome de usuário 2 vezes...
+        // TODO esse check de token/usuário está muito estranho, ele revalida nome de
+        // usuário 2 vezes...
         if (nome != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = context.getBean(UsuarioDetailService.class).loadUserByUsername(nome);
             if (jwtService.validateToken(token, userDetails)) {
                 // logando com token validado, agora usando para a autenticar
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,
+                        null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken); // token salvo no security context, ele salva essa sessão como nova
+                SecurityContextHolder.getContext().setAuthentication(authToken); // token salvo no security context, ele
+                                                                                 // salva essa sessão como nova
             }
         }
 
         filterChain.doFilter(request, response);
+        // fazendo audit log no retorno da operação
+        String method = request.getMethod();
+        String uri = request.getRequestURI();
+        Integer status = response.getStatus();
+
+        AuditLog auditLog = new AuditLog();
+        auditLog.setStatus(status);
+        auditLog.setMethod(method);
+        auditLog.setOperation(uri);
+
+        Integer userId = null;
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null
+                && authentication.isAuthenticated()
+                && authentication.getPrincipal() instanceof UserDetails userDetails) {
+            Users user = context.getBean(UsuarioDetailService.class)
+                    .findUserByUsername(userDetails.getUsername());
+            userId = user.getId();
+        }
+
+        auditLog.setCreated_by(userId);
+
+        auditLogService.inserirAudit_log(auditLog);
     }
 
-    
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         return Boolean.TRUE.equals(development);

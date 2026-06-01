@@ -24,4 +24,13 @@ public class UsuarioDetailService implements UserDetailsService{
         
         return new UsuarioPrincipal(users);
     }
+    
+    public Users findUserByUsername(String username) throws UsernameNotFoundException {
+        Users users = usersRepository.findByUsername(username);
+        if (users == null) {
+            throw new UsernameNotFoundException("Usuário não encontrado");
+        }
+        
+        return users;
+    }
 }
