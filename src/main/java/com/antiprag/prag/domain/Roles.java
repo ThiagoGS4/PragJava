@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
@@ -33,8 +35,21 @@ public class Roles implements Serializable{
     @Column(name = "name")
     private String name;
 
+    public Roles(final String name) {
+        super();
+        this.name = name;
+    }
 
     @ManyToMany(mappedBy = "roles")
     @JsonBackReference // evitando loop infinito (child)
     private Collection<Users> userList;
+
+    @ManyToMany
+    @JoinTable(
+        name = "roles_privileges", 
+        joinColumns = @JoinColumn(
+          name = "role_id", referencedColumnName = "id"), 
+        inverseJoinColumns = @JoinColumn(
+          name = "privilege_id", referencedColumnName = "id"))
+    private Collection<Privilege> privileges;
 }
