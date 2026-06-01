@@ -1,11 +1,8 @@
 package com.antiprag.prag.mapper;
+
 import java.time.Instant;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
-
-import com.antiprag.prag.JWTFilter;
 import com.antiprag.prag.DTO.CustomerInDTO;
 import com.antiprag.prag.DTO.CustomerOutDTO;
 import com.antiprag.prag.domain.Customer;
@@ -13,7 +10,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Component
-@ConfigurationProperties(prefix = "app.zone")
+@ConfigurationProperties(prefix = "app.jwt-zone")
 public class CustomerMapper {
 
     @PersistenceContext

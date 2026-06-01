@@ -15,7 +15,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Component
-@ConfigurationProperties(prefix = "app.zone")
+@ConfigurationProperties(prefix = "app.jwt-zone")
 public class SchedulesMapper {
     @PersistenceContext
     private EntityManager entityManager;

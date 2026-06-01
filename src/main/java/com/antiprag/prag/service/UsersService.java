@@ -8,13 +8,12 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import com.antiprag.prag.DTO.TokensDTO;
 import com.antiprag.prag.DTO.UsersInDTO;
 import com.antiprag.prag.DTO.UsersOutDTO;
 import com.antiprag.prag.domain.Users;
 import com.antiprag.prag.mapper.UserMapper;
 import com.antiprag.prag.repository.UsersRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -34,6 +33,12 @@ public class UsersService {
             .orElseThrow(() -> new RuntimeException("User not found"));
 
         return userMapper.usersToOutDto(user);
+    }
+
+    public Users findByUsername(String username) {
+        Users user = usersRepository.findByUsername(username);
+
+        return user;
     }
 
     public List<UsersOutDTO> ListUsers() {
@@ -65,7 +70,7 @@ public class UsersService {
         return users;
     }
 
-    public String verify(Users users) { // TODO criar DTO para login
+    public TokensDTO verify(Users users) { // TODO criar DTO para login
         SecurityContext context = SecurityContextHolder.createEmptyContext(); // criando contextHolder
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUsername(), users.getPassword()));
    if (authentication.isAuthenticated()) {
@@ -73,12 +78,10 @@ public class UsersService {
         context.setAuthentication(authentication); // colocando autenticação, pois usuário está autenticado
 
         SecurityContextHolder.setContext(context); // alimentando contexto de Sec.
-        
-        System.out.println("SecurityContextHolder.getContext() --> " + SecurityContextHolder.getContext());
 
-         return jwtService.generateToken(users.getUsername());
+         return jwtService.generateTokens(users.getUsername(), users.getRoles());
         } else {
-            return "Falha";
+            throw new IllegalArgumentException("Erro ao gerar tokens");
         }
     }
 

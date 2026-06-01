@@ -39,7 +39,7 @@ public class SecurityConfig {
 
         String[] allowedRoutes = Boolean.TRUE.equals(development)
                 ? new String[] { "/**" }
-                : new String[] { "/logar", "/registrar" };
+                : new String[] { "/logar", "/registrar", "/refreshLogin" };
 
         return http
                 .csrf(csrf -> csrf.disable())

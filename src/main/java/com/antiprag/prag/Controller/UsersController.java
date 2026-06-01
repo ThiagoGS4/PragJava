@@ -1,12 +1,14 @@
 package com.antiprag.prag.Controller;
 
+import com.antiprag.prag.DTO.TokensDTO;
 import com.antiprag.prag.DTO.UsersInDTO;
 import com.antiprag.prag.DTO.UsersOutDTO;
+import com.antiprag.prag.domain.RefreshTokenRequest;
 import com.antiprag.prag.domain.Users;
+import com.antiprag.prag.service.JWTService;
 import com.antiprag.prag.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,8 @@ public class UsersController {
 
     private final UsersService usersService;
 
+    private final JWTService jwtService;
+
     @GetMapping(path = "/users/{id}")
     public UsersOutDTO getUsers(@PathVariable("id") Integer id) {
         return usersService.getUsers(id);
@@ -48,22 +52,40 @@ public class UsersController {
     public void alterarUsers(@RequestBody Users users) throws IOException {
         usersService.alterarUsers(users);
     }
-    
+
     @PostMapping("/registrar")
     public UsersInDTO register(@RequestBody UsersInDTO users) {
         return usersService.register(users);
     }
 
     @PostMapping("/logar")
-    public String login(@RequestBody Users users) {
+    public TokensDTO login(@RequestBody Users users) {
 
         return usersService.verify(users);
     }
-    
+
+    @PostMapping("/refreshLogin")
+    public TokensDTO refreshLogin(@RequestBody RefreshTokenRequest request) {
+
+        String refreshToken = request.refreshToken();
+
+        if (!jwtService.validateRefreshToken(refreshToken)) {
+            throw new RuntimeException("Refresh token inválido");
+        }
+
+        String username = jwtService.extractUserName(refreshToken);
+        Users user = usersService.findByUsername(username);
+
+        TokensDTO newAccessToken = jwtService.generateTokens(
+                user.getUsername(),
+                user.getRoles());
+
+        return newAccessToken;
+    }
+
     @GetMapping("/csrf-token")
     public CsrfToken getCsrfToken(HttpServletRequest request) {
         return (CsrfToken) request.getAttribute("_csrf");
-
 
     }
 }

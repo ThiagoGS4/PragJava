@@ -19,7 +19,6 @@ public class UsuarioDetailService implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users users = usersRepository.findByUsername(username);
         if (users == null) {
-            System.out.println("Usuário não encontrado");
             throw new UsernameNotFoundException("Usuário não encontrado");
         }
         
