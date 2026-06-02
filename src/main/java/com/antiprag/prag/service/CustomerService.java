@@ -1,12 +1,9 @@
 package com.antiprag.prag.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import com.antiprag.prag.DTO.CustomerInDTO;
 import com.antiprag.prag.DTO.CustomerOutDTO;
 import com.antiprag.prag.domain.Customer;

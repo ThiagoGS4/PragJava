@@ -1,9 +1,5 @@
 package com.antiprag.prag.DTO;
 
-import java.util.Set;
-
-import com.antiprag.prag.domain.Customer;
-
 public record PropertiesInDTO (
     Integer id,
 

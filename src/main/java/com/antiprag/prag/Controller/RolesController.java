@@ -1,7 +1,6 @@
 package com.antiprag.prag.Controller;
 import com.antiprag.prag.domain.Roles;
 import com.antiprag.prag.service.RolesService;
-import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;

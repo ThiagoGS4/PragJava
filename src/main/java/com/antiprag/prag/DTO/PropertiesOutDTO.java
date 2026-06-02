@@ -1,7 +1,6 @@
 package com.antiprag.prag.DTO;
 
 import java.time.Instant;
-import java.util.Set;
 
 public record PropertiesOutDTO (
     String nickname,

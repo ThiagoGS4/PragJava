@@ -2,10 +2,8 @@ package com.antiprag.prag.Controller;
 
 import com.antiprag.prag.DTO.PropertiesInDTO;
 import com.antiprag.prag.DTO.PropertiesOutDTO;
-import com.antiprag.prag.domain.Properties;
 import com.antiprag.prag.domain.UsuarioPrincipal;
 import com.antiprag.prag.service.PropertiesService;
-import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
