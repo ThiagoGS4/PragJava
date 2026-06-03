@@ -1,8 +1,7 @@
 package com.antiprag.prag.domain;
 
-import java.io.Serializable;
-import java.time.Instant;
 import org.hibernate.annotations.DynamicInsert;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,39 +11,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "refresh_tokens")
+@Table(name = "certificates")
 @DynamicInsert
-
-public class RefreshToken implements Serializable {
-    
+public class Certificates {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
-    @Column(name = "token")
-    private String token;
-
-    @Column(name = "revoked")
-    private Boolean revoked;
-
-    @Column(name = "expires_at")
-    private Instant expiresAt;
-
-    @Column(name = "jti")
-    private String jti;
+    @Column(name = "url")
+    private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private Users users;
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customers;
 }

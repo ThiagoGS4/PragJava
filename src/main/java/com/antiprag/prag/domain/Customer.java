@@ -54,4 +54,7 @@ public class Customer implements Serializable{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private Set<Properties> properties;
+
+    @OneToMany(mappedBy = "customers")
+    private Set<Certificates> certificates;
 }

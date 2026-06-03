@@ -1,3 +1,3 @@
-package com.antiprag.prag.domain;
+package com.antiprag.prag.DTO;
 
 public record RefreshTokenRequest(String refreshToken) {}

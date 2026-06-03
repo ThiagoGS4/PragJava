@@ -1,0 +1,107 @@
+Date : 2026-06-02 11:48:58
+Directory : /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag
+Total : 74 files,  2448 codes, 282 comments, 601 blanks, all 3331 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Java     |         73 |      2,264 |        282 |        582 |      3,128 |
+| SQLite   |          1 |        184 |          0 |         19 |        203 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                    | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                       |         74 |      2,448 |        282 |        601 |      3,331 |
+| . (Files)                                                                                                               |          5 |        362 |         78 |         57 |        497 |
+| Controller                                                                                                              |         11 |        459 |         53 |        103 |        615 |
+| DTO                                                                                                                     |          9 |        128 |          0 |         31 |        159 |
+| domain                                                                                                                  |         15 |        581 |         65 |        115 |        761 |
+| handler                                                                                                                 |          2 |         31 |          1 |         10 |         42 |
+| mapper                                                                                                                  |          6 |        262 |         10 |         61 |        333 |
+| repository                                                                                                              |         13 |         90 |         30 |         49 |        169 |
+| service                                                                                                                 |         13 |        535 |         45 |        175 |        755 |
++-------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/AuditLogController.java     | Java     |         26 |          0 |          5 |         31 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/CustomerController.java     | Java     |         47 |          1 |         10 |         58 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/HistoryController.java      | Java     |         44 |          0 |         10 |         54 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/PlaguesController.java      | Java     |         44 |          0 |         10 |         54 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/PrivilegeController.java    | Java     |          0 |         52 |          0 |         52 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/PropertiesController.java   | Java     |         47 |          0 |         11 |         58 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/RolesController.java        | Java     |         44 |          0 |          8 |         52 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/SchedulesController.java    | Java     |         47 |          0 |         10 |         57 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/ServicesController.java     | Java     |         44 |          0 |         10 |         54 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/StatusController.java       | Java     |         44 |          0 |         10 |         54 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/Controller/UsersController.java        | Java     |         72 |          0 |         19 |         91 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/CustomerInDTO.java                 | Java     |         26 |          0 |          8 |         34 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/CustomerOutDTO.java                | Java     |         10 |          0 |          3 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/PropertiesInDTO.java               | Java     |         20 |          0 |          3 |         23 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/PropertiesOutDTO.java              | Java     |         21 |          0 |          3 |         24 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/SchedulesInDTO.java                | Java     |         14 |          0 |          2 |         16 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/SchedulesOutDTO.java               | Java     |         15 |          0 |          4 |         19 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/TokensDTO.java                     | Java     |          5 |          0 |          2 |          7 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/UsersInDTO.java                    | Java     |          8 |          0 |          3 |         11 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/DTO/UsersOutDTO.java                   | Java     |          9 |          0 |          3 |         12 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/JWTFilter.java                         | Java     |         75 |          6 |         17 |         98 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/PragApplication.java                   | Java     |         42 |          0 |          9 |         51 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/SecurityConfig.java                    | Java     |         61 |          0 |         11 |         72 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/SetupDataLoader.java                   | Java     |          0 |         72 |          1 |         73 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/db.sql                                 | SQLite   |        184 |          0 |         19 |        203 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/AuditLog.java                   | Java     |         39 |          0 |          9 |         48 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Customer.java                   | Java     |         50 |          0 |          8 |         58 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/History.java                    | Java     |         51 |          0 |          8 |         59 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Permission.java                 | Java     |         32 |          0 |          9 |         41 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Plagues.java                    | Java     |         31 |          0 |          7 |         38 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Privilege.java                  | Java     |          0 |         57 |          1 |         58 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Properties.java                 | Java     |         71 |          0 |          8 |         79 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/RefreshToken.java               | Java     |         41 |          0 |         12 |         53 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/RefreshTokenRequest.java        | Java     |          2 |          0 |          2 |          4 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Roles.java                      | Java     |         43 |          8 |          9 |         60 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Schedules.java                  | Java     |         61 |          0 |          7 |         68 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Services.java                   | Java     |         31 |          0 |          6 |         37 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Status.java                     | Java     |         31 |          0 |          7 |         38 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/Users.java                      | Java     |         55 |          0 |          8 |         63 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/domain/UsuarioPrincipal.java           | Java     |         43 |          0 |         14 |         57 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/handler/ErrorResponse.java             | Java     |          7 |          0 |          4 |         11 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/handler/ValidationHandler.java         | Java     |         24 |          1 |          6 |         31 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/mapper/CustomerMapper.java             | Java     |         47 |          3 |         10 |         60 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/mapper/PropertiesMapper.java           | Java     |         80 |          2 |         13 |         95 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/mapper/RefreshTokenMapper.java         | Java     |         16 |          0 |          9 |         25 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/mapper/SchedulesMapper.java            | Java     |         67 |          3 |         14 |         84 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/mapper/TokensMapper.java               | Java     |         13 |          0 |          6 |         19 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/mapper/UserMapper.java                 | Java     |         39 |          2 |          9 |         50 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/AuditLogRepository.java     | Java     |          7 |          3 |          3 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/CustomerRepository.java     | Java     |          7 |          2 |          4 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/HistoryRepository.java      | Java     |          7 |          2 |          4 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/PermissionRepository.java   | Java     |          7 |          0 |          3 |         10 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/PlaguesRepository.java      | Java     |          7 |          2 |          4 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/PrivilegeRepository.java    | Java     |          0 |         11 |          1 |         12 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/PropertiesRepository.java   | Java     |          7 |          2 |          4 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/RefreshTokenRepository.java | Java     |         10 |          0 |          6 |         16 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/RolesRepository.java        | Java     |          9 |          0 |          4 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/SchedulesRepository.java    | Java     |          7 |          2 |          5 |         14 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/ServicesRepository.java     | Java     |          7 |          2 |          4 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/StatusRepository.java       | Java     |          7 |          2 |          4 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/repository/UsersRepository.java        | Java     |          8 |          2 |          3 |         13 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/AuditLogService.java           | Java     |         17 |          0 |          5 |         22 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/CustomerService.java           | Java     |         44 |          0 |         15 |         59 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/HistoryService.java            | Java     |         29 |          0 |         11 |         40 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/JWTService.java                | Java     |        131 |          5 |         38 |        174 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/PlaguesService.java            | Java     |         29 |          0 |         11 |         40 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/PrivilegeService.java          | Java     |          0 |         39 |          0 |         39 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/PropertiesService.java         | Java     |         41 |          1 |         16 |         58 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/RolesService.java              | Java     |         29 |          0 |         11 |         40 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/SchedulesService.java          | Java     |         44 |          0 |         14 |         58 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/ServicesService.java           | Java     |         29 |          0 |         11 |         40 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/StatusService.java             | Java     |         29 |          0 |         11 |         40 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/UsersService.java              | Java     |         66 |          0 |         22 |         88 |
+| /media/Windows/Projects/facul-temp/PragJava/prag/src/main/java/com/antiprag/prag/service/UsuarioDetailService.java      | Java     |         47 |          0 |         10 |         57 |
+| Total                                                                                                                   |          |      2,448 |        282 |        601 |      3,331 |
++-------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

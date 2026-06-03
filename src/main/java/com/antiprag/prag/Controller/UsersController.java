@@ -1,9 +1,9 @@
 package com.antiprag.prag.Controller;
 
+import com.antiprag.prag.DTO.RefreshTokenRequest;
 import com.antiprag.prag.DTO.TokensDTO;
 import com.antiprag.prag.DTO.UsersInDTO;
 import com.antiprag.prag.DTO.UsersOutDTO;
-import com.antiprag.prag.domain.RefreshTokenRequest;
 import com.antiprag.prag.domain.Users;
 import com.antiprag.prag.service.JWTService;
 import com.antiprag.prag.service.UsersService;
