@@ -6,6 +6,8 @@ app:
         zone-time: 10800
     dev:
         development: false
+    external:
+        cert-api: "http://localhost:9090"
 spring:
   profiles:
     active: local
