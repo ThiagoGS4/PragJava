@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +33,14 @@ public class UsersController {
     private final UsersService usersService;
 
     private final JWTService jwtService;
+
+    @GetMapping("/me")
+    public ResponseEntity<String> me(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(authentication.getName());
+    }
 
     @GetMapping(path = "/users/{id}")
     public UsersOutDTO getUsers(@PathVariable("id") Integer id) {

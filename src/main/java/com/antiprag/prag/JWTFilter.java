@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -91,8 +92,13 @@ public class JWTFilter extends OncePerRequestFilter {
         auditLogService.inserirAudit_log(auditLog);
     }
 
+    private final List<String> excludedMatchers = List.of(
+            ("/logar"),
+            ("/registrar")
+    );
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return Boolean.TRUE.equals(development);
+        return Boolean.TRUE.equals(development) || excludedMatchers.contains(request.getServletPath());
     }
 }
