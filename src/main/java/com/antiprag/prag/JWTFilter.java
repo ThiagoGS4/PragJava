@@ -2,9 +2,12 @@ package com.antiprag.prag;
 
 import com.antiprag.prag.domain.AuditLog;
 import com.antiprag.prag.domain.Users;
+import com.antiprag.prag.handler.JWTErrorHandler;
 import com.antiprag.prag.service.AuditLogService;
 import com.antiprag.prag.service.JWTService;
 import com.antiprag.prag.service.UsuarioDetailService;
+
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,7 +50,12 @@ public class JWTFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
-            nome = jwtService.extractUserName(token); // pegando username através de claims do JWT
+            try{
+                nome = jwtService.extractUserName(token); // pegando username através de claims do JWT
+            } catch (ExpiredJwtException error){
+                JWTErrorHandler.handleValidation(response, "Access Token expirado.", "TOKEN_EXPIRED", error.getMessage());
+                return;
+            }
         }
 
         // vendo se usuário é nulo e se já existe sessão ativa desse usuário
@@ -94,7 +102,8 @@ public class JWTFilter extends OncePerRequestFilter {
 
     private final List<String> excludedMatchers = List.of(
             ("/logar"),
-            ("/registrar")
+            ("/registrar"),
+            ("/refreshLogin")
     );
 
     @Override
