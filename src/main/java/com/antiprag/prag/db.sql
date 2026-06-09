@@ -33,7 +33,7 @@ CREATE TABLE `audit_log` (
   PRIMARY KEY (`id`),
   KEY `fk_audit_created_by` (`created_by`),
   CONSTRAINT `fk_audit_created_by` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,48 +79,6 @@ CREATE TABLE `customers` (
   CONSTRAINT `fk_cusomer_edited_by` FOREIGN KEY (`edited_by`) REFERENCES `users` (`id`),
   CONSTRAINT `chk_customer_document` CHECK (`cpf` is not null and `cnpj` is null or `cnpj` is not null and `cpf` is null)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `history`
---
-
-DROP TABLE IF EXISTS `history`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `history` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `schedule_id` int(10) unsigned NOT NULL,
-  `property_id` int(10) unsigned NOT NULL,
-  `plague_id` int(10) unsigned NOT NULL,
-  `service_id` int(10) unsigned NOT NULL,
-  `technician_id` int(10) unsigned DEFAULT NULL,
-  `status_id` tinyint(3) unsigned NOT NULL,
-  `execution_date` datetime NOT NULL,
-  `notes` text DEFAULT NULL,
-  `certificate_url` varchar(255) DEFAULT NULL,
-  `created_by` int(10) unsigned NOT NULL,
-  `edited_by` int(10) unsigned DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_history_schedule` (`schedule_id`),
-  KEY `fk_history_property` (`property_id`),
-  KEY `fk_history_plague` (`plague_id`),
-  KEY `fk_history_service` (`service_id`),
-  KEY `fk_history_technician` (`technician_id`),
-  KEY `fk_history_status` (`status_id`),
-  KEY `fk_history_created_by` (`created_by`),
-  KEY `fk_history_edited_by` (`edited_by`),
-  CONSTRAINT `fk_history_created_by` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `fk_history_edited_by` FOREIGN KEY (`edited_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `fk_history_plague` FOREIGN KEY (`plague_id`) REFERENCES `plagues` (`id`),
-  CONSTRAINT `fk_history_property` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`),
-  CONSTRAINT `fk_history_schedule` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`id`),
-  CONSTRAINT `fk_history_service` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`),
-  CONSTRAINT `fk_history_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`),
-  CONSTRAINT `fk_history_technician` FOREIGN KEY (`technician_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +180,7 @@ CREATE TABLE `refresh_tokens` (
   KEY `fk_refresh_tokens_user` (`user_id`),
   CONSTRAINT `1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_refresh_tokens_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=221 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,4 +347,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-06-03 12:34:56
+-- Dump completed on 2026-06-09  8:45:36
