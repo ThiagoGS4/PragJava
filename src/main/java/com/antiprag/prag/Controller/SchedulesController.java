@@ -38,7 +38,7 @@ public class SchedulesController {
         return schedulesService.ListSchedules();
     }
 
-    @DeleteMapping(path = "schedules/{id}")
+    @DeleteMapping(path = "/schedules/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarSchedules(@PathVariable("id") Integer id) throws IOException {
         schedulesService.deletarSchedules(id);

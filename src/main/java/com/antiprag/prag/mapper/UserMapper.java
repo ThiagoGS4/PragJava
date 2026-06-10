@@ -24,6 +24,7 @@ public class UserMapper {
             .collect(Collectors.toSet());
 
         return new UsersOutDTO(
+                user.getId(),
                 user.getUsername(),
                 user.getIsActive(),
                 user.getCreatedAt(),

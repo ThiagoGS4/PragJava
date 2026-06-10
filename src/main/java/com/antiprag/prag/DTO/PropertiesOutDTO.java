@@ -3,6 +3,7 @@ package com.antiprag.prag.DTO;
 import java.time.Instant;
 
 public record PropertiesOutDTO (
+    Integer id,
     String nickname,
     String cep,
     String street,
@@ -19,5 +20,10 @@ public record PropertiesOutDTO (
     String property_type,
     Integer is_active,
     Instant created_at,
-    String customer
-){}
+    Customer customer
+){
+    public static record Customer(
+        Integer id,
+        String name
+    ) {}
+}

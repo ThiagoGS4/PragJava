@@ -26,6 +26,7 @@ public class PropertiesMapper {
     // dto para output de dados do(s) clientes(s)
     public PropertiesOutDTO propertiesToOutDto(Properties properties) {
         return new PropertiesOutDTO(
+                properties.getId(),
                 properties.getNickname(),
                 properties.getCep(),
                 properties.getStreet(),
@@ -42,7 +43,11 @@ public class PropertiesMapper {
                 properties.getProperty_type(),
                 properties.getIs_active(),
                 properties.getCreated_at(),
-                properties.getCustomer().getName()
+                properties.getCustomer() != null
+                        ? new PropertiesOutDTO.Customer(
+                                properties.getCustomer().getId(),
+                                properties.getCustomer().getName())
+                        : null
 
         );
     }

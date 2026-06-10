@@ -30,18 +30,38 @@ public class SchedulesMapper {
     public SchedulesOutDTO schedulesToOutDto(Schedules schedules) {
 
         return new SchedulesOutDTO(
-                schedules.getScheduled_start(), 
-                schedules.getScheduled_end(), 
-                schedules.getCompleted_at(), 
-                schedules.getNotes(), 
-                schedules.getCreated_at(), 
-                schedules.getUpdated_at(), 
-                schedules.getProperties().getNickname(), 
-                schedules.getPlagues().getPlague_name(), 
-                schedules.getServices().getService_name(), 
-                schedules.getStatus().getStatus_name(), 
-                schedules.getUsers().getUsername()
-        );
+                schedules.getId(),
+                schedules.getScheduled_start(),
+                schedules.getScheduled_end(),
+                schedules.getCompleted_at(),
+                schedules.getNotes(),
+                schedules.getCreated_at(),
+                schedules.getUpdated_at(),
+                schedules.getProperties() != null
+                        ? new SchedulesOutDTO.Property(
+                                schedules.getProperties().getId(),
+                                schedules.getProperties().getNickname())
+                        : null,
+                schedules.getPlagues() != null
+                        ? new SchedulesOutDTO.Plague(
+                                schedules.getPlagues().getId(),
+                                schedules.getPlagues().getPlague_name())
+                        : null,
+                schedules.getServices() != null
+                        ? new SchedulesOutDTO.Service(
+                                schedules.getServices().getId(),
+                                schedules.getServices().getService_name())
+                        : null,
+                schedules.getStatus() != null
+                        ? new SchedulesOutDTO.Status(
+                                schedules.getStatus().getId(),
+                                schedules.getStatus().getStatus_name())
+                        : null,
+                schedules.getUsers() != null
+                        ? new SchedulesOutDTO.Users(
+                                schedules.getUsers().getId(),
+                                schedules.getUsers().getUsername())
+                        : null);
     }
 
     // dto para input de cliente
@@ -57,8 +77,8 @@ public class SchedulesMapper {
         schedules.setPlagues(entityManager.getReference(Plagues.class, dto.plagues()));
         schedules.setServices(entityManager.getReference(Services.class, dto.service()));
         schedules.setStatus(entityManager.getReference(Status.class, dto.status()));
-        schedules.setUsers(entityManager.getReference(Users.class, dto.user()));
-        
+        schedules.setUsers(entityManager.getReference(Users.class, dto.users()));
+
         return schedules;
     }
 
@@ -72,12 +92,10 @@ public class SchedulesMapper {
         schedules.setPlagues(entityManager.getReference(Plagues.class, dto.plagues()));
         schedules.setServices(entityManager.getReference(Services.class, dto.service()));
         schedules.setStatus(entityManager.getReference(Status.class, dto.status()));
-        schedules.setUsers(entityManager.getReference(Users.class, dto.user()));
+        schedules.setUsers(entityManager.getReference(Users.class, dto.users()));
         schedules.setUpdated_at(Instant.now().minusSeconds(zoneTime));
         schedules.setEdited_by(userId);
-        
+
         return schedules;
     }
 }
-
-

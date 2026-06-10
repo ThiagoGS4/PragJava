@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.Set;
 
 public record UsersOutDTO (
+    Integer id,
     String username,
     Boolean is_active,
     Instant created_at,

@@ -2,14 +2,11 @@ package com.antiprag.prag.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +28,4 @@ public class Plagues implements Serializable{
     private Integer id;
     @Column(name = "plague_name")
     private String plague_name;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "plagues")
-    private List<Schedules> schedules;
 }

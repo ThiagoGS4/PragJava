@@ -11,5 +11,5 @@ public record SchedulesInDTO (
     Integer plagues,
     Integer service,
     Integer status,
-    Integer user
+    Integer users
 ){}
