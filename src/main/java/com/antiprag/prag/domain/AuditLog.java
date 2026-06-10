@@ -30,8 +30,6 @@ public class AuditLog implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "user_id")
-    private Integer user_id;
     @Column(name = "operation")
     private String operation;
     @Column(name = "method")

@@ -19,12 +19,12 @@ public class AuditLogController {
         this.audit_logService = audit_logService;
     }
 
-    @GetMapping(path = "/audit_log")
+    @GetMapping(path = "/auditLog")
     public List<AuditLog> ListAudit_log() {
         return audit_logService.ListAudit_log();
     }
 
-    @PostMapping(path = "/inserirAudit_log")
+    @PostMapping(path = "/inserirAuditLog")
     public void inserirAudit_log(@RequestBody AuditLog audit_log) throws IOException {
         audit_logService.inserirAudit_log(audit_log);
     }
