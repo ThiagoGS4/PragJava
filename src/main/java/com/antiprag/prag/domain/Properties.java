@@ -57,9 +57,9 @@ public class Properties implements Serializable{
     @Column(name = "google_place_id")
     private String google_place_id;
     @Column(name = "latitude")
-    private Integer latitude;
+    private Double latitude;
     @Column(name = "longitude")
-    private Integer longitude;
+    private Double longitude;
     @Column(name = "property_type")
     private String property_type;
     @Column(name = "is_active")

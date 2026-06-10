@@ -38,7 +38,7 @@ public class PropertiesController {
         return propertiesService.ListProperties();
     }
 
-    @DeleteMapping(path = "/deletar/Properties/{id}")
+    @DeleteMapping(path = "/properties/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarProperties(@PathVariable("id") Integer id) throws IOException {
         propertiesService.deletarProperties(id);
