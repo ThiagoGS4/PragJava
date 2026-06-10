@@ -25,6 +25,7 @@ public class CustomerMapper {
     // dto para output de dados do(s) clientes(s)
     public CustomerOutDTO customerToOutDto(Customer customer) {
         return new CustomerOutDTO(
+                customer.getId(),
                 customer.getName(),
                 customer.getCpf(),
                 customer.getCnpj(),
