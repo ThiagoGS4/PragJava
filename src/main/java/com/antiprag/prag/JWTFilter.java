@@ -3,10 +3,10 @@ package com.antiprag.prag;
 import com.antiprag.prag.domain.AuditLog;
 import com.antiprag.prag.domain.Users;
 import com.antiprag.prag.handler.JWTErrorHandler;
+import com.antiprag.prag.repository.UsersRepository;
 import com.antiprag.prag.service.AuditLogService;
 import com.antiprag.prag.service.JWTService;
 import com.antiprag.prag.service.UsuarioDetailService;
-
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -32,6 +32,7 @@ public class JWTFilter extends OncePerRequestFilter {
     private Boolean development;
 
     private final AuditLogService auditLogService;
+    private final UsersRepository usersRepository;
 
     public void setDevelopment(Boolean development) {
         this.development = development;
@@ -95,7 +96,10 @@ public class JWTFilter extends OncePerRequestFilter {
             userId = user.getId();
         }
 
-        auditLog.setCreated_by(userId);
+       Users userFound = usersRepository.findById(userId)
+            .orElseThrow(() -> new Error("User not found"));;
+
+        auditLog.setUsers(userFound);
 
         auditLogService.inserirAudit_log(auditLog);
     }

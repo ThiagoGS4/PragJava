@@ -1,4 +1,5 @@
 package com.antiprag.prag.Controller;
+import com.antiprag.prag.DTO.AuditLogOutDTO;
 import com.antiprag.prag.domain.AuditLog;
 import com.antiprag.prag.service.AuditLogService;
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class AuditLogController {
     }
 
     @GetMapping(path = "/auditLog")
-    public List<AuditLog> ListAudit_log() {
+    public List<AuditLogOutDTO> ListAudit_log() {
         return audit_logService.ListAudit_log();
     }
 
