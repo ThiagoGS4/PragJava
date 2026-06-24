@@ -1,10 +1,6 @@
 package com.antiprag.prag;
 
-import com.antiprag.prag.domain.AuditLog;
-import com.antiprag.prag.domain.Users;
 import com.antiprag.prag.handler.JWTErrorHandler;
-import com.antiprag.prag.repository.UsersRepository;
-import com.antiprag.prag.service.AuditLogService;
 import com.antiprag.prag.service.JWTService;
 import com.antiprag.prag.service.UsuarioDetailService;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -15,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,22 +22,20 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
+@Order(2)
 @RequiredArgsConstructor
 @ConfigurationProperties(prefix = "app.dev")
 public class JWTFilter extends OncePerRequestFilter {
 
     private Boolean development;
 
-    private final AuditLogService auditLogService;
-    private final UsersRepository usersRepository;
-
     public void setDevelopment(Boolean development) {
         this.development = development;
     }
 
     private final JWTService jwtService;
-
     private final ApplicationContext context;
+    private final AuditLogFilter auditLogFilter;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -54,6 +49,8 @@ public class JWTFilter extends OncePerRequestFilter {
             try{
                 nome = jwtService.extractUserName(token); // pegando username através de claims do JWT
             } catch (ExpiredJwtException error){
+                response.setStatus(401);
+                auditLogFilter.registrarErros(request, response);
                 JWTErrorHandler.handleValidation(response, "Access Token expirado.", "TOKEN_EXPIRED", error.getMessage());
                 return;
             }
@@ -75,33 +72,6 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-        // fazendo audit log no retorno da operação
-        String method = request.getMethod();
-        String uri = request.getRequestURI();
-        Integer status = response.getStatus();
-
-        AuditLog auditLog = new AuditLog();
-        auditLog.setStatus(status);
-        auditLog.setMethod(method);
-        auditLog.setOperation(uri);
-
-        Integer userId = null;
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null
-                && authentication.isAuthenticated()
-                && authentication.getPrincipal() instanceof UserDetails userDetails) {
-            Users user = context.getBean(UsuarioDetailService.class)
-                    .findUserByUsername(userDetails.getUsername());
-            userId = user.getId();
-        }
-
-       Users userFound = usersRepository.findById(userId)
-            .orElseThrow(() -> new Error("User not found"));;
-
-        auditLog.setUsers(userFound);
-
-        auditLogService.inserirAudit_log(auditLog);
     }
 
     private final List<String> excludedMatchers = List.of(

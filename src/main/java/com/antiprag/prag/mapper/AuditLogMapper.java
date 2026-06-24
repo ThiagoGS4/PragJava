@@ -17,7 +17,8 @@ public class AuditLogMapper {
             auditLog.getMethod(),
             username,
             auditLog.getCreated_at(),
-            auditLog.getStatus()
+            auditLog.getStatus(),
+            auditLog.getIp()
         );
     }
 }

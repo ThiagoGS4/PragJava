@@ -41,8 +41,12 @@ public class AuditLog implements Serializable{
     private Instant created_at;
     @Column(name = "status")
     private Integer status;
+    @Column(name = "payload")
+    private String payload;
+    @Column(name = "ip")
+    private String ip;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by", nullable = false)
+    @JoinColumn(name = "created_by", nullable = true)
     private Users users;
 
 

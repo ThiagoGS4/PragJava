@@ -8,5 +8,6 @@ String operation,
 String method,
 String created_by,
 Instant created_at,
-Integer status
+Integer status,
+String ip
 ){}

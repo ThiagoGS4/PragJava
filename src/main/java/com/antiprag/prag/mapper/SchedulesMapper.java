@@ -77,7 +77,7 @@ public class SchedulesMapper {
         schedules.setPlagues(entityManager.getReference(Plagues.class, dto.plagues()));
         schedules.setServices(entityManager.getReference(Services.class, dto.service()));
         schedules.setStatus(entityManager.getReference(Status.class, dto.status()));
-        schedules.setUsers(entityManager.getReference(Users.class, dto.users()));
+        schedules.setUsers(entityManager.getReference(Users.class, userId));
 
         return schedules;
     }

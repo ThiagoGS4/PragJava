@@ -27,6 +27,7 @@ public class SecurityConfig {
     private Boolean development;
 
     private final UserDetailsService userDetailsService;
+    private final AuditLogFilter auditLogFilter;
     private final JWTFilter jwtFilter;
 
     public void setDevelopment(Boolean development) {
@@ -50,7 +51,17 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .exceptionHandling(ex -> ex
+                    .authenticationEntryPoint((request, response, e) -> {
+                        response.setStatus(401);
+                        auditLogFilter.registrarErros(request, response);
+                    })
+                    .accessDeniedHandler((request, response, e) -> {
+                        response.setStatus(403);
+                        auditLogFilter.registrarErros(request, response);
+                    })
+                )
+            .build();
     }
 
     @Bean
