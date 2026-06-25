@@ -35,19 +35,19 @@ public class ServicesController {
         return servicesService.ListServices();
     }
 
-    @DeleteMapping(path = "/deletar/Services/{id}")
+    @DeleteMapping(path = "/services/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarServices(@PathVariable("id") Integer id) throws IOException {
         servicesService.deletarServices(id);
     }
 
     @PutMapping(path = "/alterarServices")
-    public void alterarServices(@RequestBody Services services) throws IOException {
-        servicesService.alterarServices(services);
+    public Services alterarServices(@RequestBody Services services) throws IOException {
+        return servicesService.alterarServices(services);
     }
 
     @PostMapping(path = "/inserirServices")
-    public void inserirServices(@RequestBody Services services) throws IOException {
-        servicesService.inserirServices(services);
+    public Services inserirServices(@RequestBody Services services) throws IOException {
+        return servicesService.inserirServices(services);
     }
 }

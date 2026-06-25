@@ -45,17 +45,17 @@ public class SchedulesMapper {
                 schedules.getPlagues() != null
                         ? new SchedulesOutDTO.Plague(
                                 schedules.getPlagues().getId(),
-                                schedules.getPlagues().getPlague_name())
+                                schedules.getPlagues().getPlagueName())
                         : null,
                 schedules.getServices() != null
                         ? new SchedulesOutDTO.Service(
                                 schedules.getServices().getId(),
-                                schedules.getServices().getService_name())
+                                schedules.getServices().getServiceName())
                         : null,
                 schedules.getStatus() != null
                         ? new SchedulesOutDTO.Status(
                                 schedules.getStatus().getId(),
-                                schedules.getStatus().getStatus_name())
+                                schedules.getStatus().getStatusName())
                         : null,
                 schedules.getUsers() != null
                         ? new SchedulesOutDTO.Users(

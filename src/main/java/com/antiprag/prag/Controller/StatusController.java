@@ -35,19 +35,19 @@ public class StatusController {
         return statusService.ListStatus();
     }
 
-    @DeleteMapping(path = "/deletar/Status/{id}")
+    @DeleteMapping(path = "/status/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarStatus(@PathVariable("id") Integer id) throws IOException {
         statusService.deletarStatus(id);
     }
 
     @PutMapping(path = "/alterarStatus")
-    public void alterarStatus(@RequestBody Status status) throws IOException {
-        statusService.alterarStatus(status);
+    public Status alterarStatus(@RequestBody Status status) throws IOException {
+        return statusService.alterarStatus(status);
     }
 
     @PostMapping(path = "/inserirStatus")
-    public void inserirStatus(@RequestBody Status status) throws IOException {
-        statusService.inserirStatus(status);
+    public Status inserirStatus(@RequestBody Status status) throws IOException {
+        return statusService.inserirStatus(status);
     }
 }

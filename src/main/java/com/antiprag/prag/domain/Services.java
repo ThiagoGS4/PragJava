@@ -27,5 +27,5 @@ public class Services implements Serializable{
     @Column(name = "id")
     private Integer id;
     @Column(name = "service_name")
-    private String service_name;
+    private String serviceName;
 }

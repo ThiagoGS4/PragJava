@@ -29,11 +29,11 @@ public class ServicesService {
         servicesRepository.deleteById(idServices);
     }
 
-    public void alterarServices(Services Services) {
-        servicesRepository.save(Services);
+    public Services alterarServices(Services Services) {
+        return servicesRepository.save(Services);
     }
 
-    public void inserirServices(Services services) {
-        servicesRepository.save(services);
+    public Services inserirServices(Services services) {
+        return servicesRepository.save(services);
     }
 }

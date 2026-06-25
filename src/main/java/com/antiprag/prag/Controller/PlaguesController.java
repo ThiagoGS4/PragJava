@@ -35,19 +35,19 @@ public class PlaguesController {
         return plaguesService.ListPlagues();
     }
 
-    @DeleteMapping(path = "/deletar/Plagues/{id}")
+    @DeleteMapping(path = "/plagues/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarPlagues(@PathVariable("id") Integer id) throws IOException {
         plaguesService.deletarPlagues(id);
     }
 
     @PutMapping(path = "/alterarPlagues")
-    public void alterarPlagues(@RequestBody Plagues plagues) throws IOException {
-        plaguesService.alterarPlagues(plagues);
+    public Plagues alterarPlagues(@RequestBody Plagues plagues) throws IOException {
+        return plaguesService.alterarPlagues(plagues);
     }
 
     @PostMapping(path = "/inserirPlagues")
-    public void inserirPlagues(@RequestBody Plagues plagues) throws IOException {
-        plaguesService.inserirPlagues(plagues);
+    public Plagues inserirPlagues(@RequestBody Plagues plagues) throws IOException {
+        return plaguesService.inserirPlagues(plagues);
     }
 }

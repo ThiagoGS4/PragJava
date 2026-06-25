@@ -29,11 +29,11 @@ public class PlaguesService {
         plaguesRepository.deleteById(idPlagues);
     }
 
-    public void alterarPlagues(Plagues Plagues) {
-        plaguesRepository.save(Plagues);
+    public Plagues alterarPlagues(Plagues Plagues) {
+        return plaguesRepository.save(Plagues);
     }
 
-    public void inserirPlagues(Plagues plagues) {
-        plaguesRepository.save(plagues);
+    public Plagues inserirPlagues(Plagues plagues) {
+        return plaguesRepository.save(plagues);
     }
 }

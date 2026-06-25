@@ -27,5 +27,5 @@ public class Plagues implements Serializable{
     @Column(name = "id")
     private Integer id;
     @Column(name = "plague_name")
-    private String plague_name;
+    private String plagueName;
 }

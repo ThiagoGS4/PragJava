@@ -25,11 +25,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuditLogFilter extends OncePerRequestFilter {
 
-    @Override
-    protected boolean shouldNotFilterErrorDispatch() {
-        return false;
-    }
-
     private final ApplicationContext context;
     private final UsersRepository usersRepository;
     private final AuditLogService auditLogService;

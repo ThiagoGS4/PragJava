@@ -29,11 +29,11 @@ public class StatusService {
         statusRepository.deleteById(idStatus);
     }
 
-    public void alterarStatus(Status Status) {
-        statusRepository.save(Status);
+    public Status alterarStatus(Status Status) {
+        return statusRepository.save(Status);
     }
 
-    public void inserirStatus(Status status) {
-        statusRepository.save(status);
+    public Status inserirStatus(Status status) {
+        return statusRepository.save(status);
     }
 }
