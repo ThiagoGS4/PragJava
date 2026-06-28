@@ -125,5 +125,8 @@ public class AuditLogFilter extends OncePerRequestFilter {
 
             auditLogService.inserirAudit_log(auditLog);
     }
-
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        return request.getServletPath() == "/me";
+    }
 }

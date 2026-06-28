@@ -50,6 +50,7 @@ public class Roles implements Serializable{
     //    inverseJoinColumns = @JoinColumn(
     //      name = "privilege_id", referencedColumnName = "id"))
     //private Collection<Privilege> privileges;
+    // todo: fazer roles funcionar e fazer error handling melhor para melhor informar o usuário
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

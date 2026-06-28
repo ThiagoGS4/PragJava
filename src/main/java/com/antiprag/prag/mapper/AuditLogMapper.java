@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuditLogMapper {
     public AuditLogOutDTO auditLogToOut(AuditLog auditLog){
-        String username = auditLog.getUsers().getUsername();
+        String username = (auditLog.getUsers() != null) 
+            ? auditLog.getUsers().getUsername() 
+            : "Não autenticado";
 
         return new AuditLogOutDTO(
             auditLog.getId(),
@@ -18,7 +20,8 @@ public class AuditLogMapper {
             username,
             auditLog.getCreated_at(),
             auditLog.getStatus(),
-            auditLog.getIp()
+            auditLog.getIp(),
+            auditLog.getPayload()
         );
     }
 }
