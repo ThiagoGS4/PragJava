@@ -13,9 +13,9 @@ public record PropertiesInDTO (
     String state,
     String country,
     String formatted_address,
-    String google_place_id,
-    Double latitude,
-    Double longitude,
+    //String google_place_id,
+    //Double latitude,
+    //Double longitude,
     String property_type,
     Integer is_active,
     Integer customer

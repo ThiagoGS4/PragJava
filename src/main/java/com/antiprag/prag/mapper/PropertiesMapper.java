@@ -37,9 +37,9 @@ public class PropertiesMapper {
                 properties.getState(),
                 properties.getCountry(),
                 properties.getFormatted_address(),
-                properties.getGoogle_place_id(),
-                properties.getLatitude(),
-                properties.getLongitude(),
+                //properties.getGoogle_place_id(),
+                //properties.getLatitude(),
+                //properties.getLongitude(),
                 properties.getProperty_type(),
                 properties.getIs_active(),
                 properties.getCreated_at(),
@@ -66,9 +66,9 @@ public class PropertiesMapper {
         properties.setState(dto.state());
         properties.setCountry(dto.country());
         properties.setFormatted_address(dto.formatted_address());
-        properties.setGoogle_place_id(dto.google_place_id());
-        properties.setLatitude(dto.latitude());
-        properties.setLongitude(dto.longitude());
+        //properties.setGoogle_place_id(dto.google_place_id());
+        //properties.setLatitude(dto.latitude());
+        //properties.setLongitude(dto.longitude());
         properties.setProperty_type(dto.property_type());
         properties.setIs_active(dto.is_active());
         properties.setCustomer(entityManager.getReference(Customer.class, dto.customer()));
@@ -87,9 +87,9 @@ public class PropertiesMapper {
         properties.setState(dto.state());
         properties.setCountry(dto.country());
         properties.setFormatted_address(dto.formatted_address());
-        properties.setGoogle_place_id(dto.google_place_id());
-        properties.setLatitude(dto.latitude());
-        properties.setLongitude(dto.longitude());
+        //properties.setGoogle_place_id(dto.google_place_id());
+        //properties.setLatitude(dto.latitude());
+        //properties.setLongitude(dto.longitude());
         properties.setProperty_type(dto.property_type());
         properties.setIs_active(dto.is_active());
         properties.setCustomer(entityManager.getReference(Customer.class, dto.customer()));
